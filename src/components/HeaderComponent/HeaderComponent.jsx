@@ -1,11 +1,14 @@
 
-import React from "react";
-import { WrapperHeader, Logo,LogoImage,SearchWrapper, SearchBar,SearchIcon, Hotline, HotlineText, AuthCart, Navbar, NavItem} from "./style";
+import React, { useState } from "react";
+import { WrapperHeader, Logo,LogoImage,SearchWrapper, SearchBar,SearchIcon, Hotline, HotlineText, AuthCart, Navbar, NavItem, DropdownMenu, DropdownColumn, DropdownTitle, DropdownItem, HeaderContainer} from "./style";
 import { SearchOutlined, ShoppingCartOutlined } from "@ant-design/icons";
+import AuthForm from "../../pages/AuthPage/AuthPage";
 
 const HeaderComponent = () => {
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
     return (
-        <>
+        <HeaderContainer>
         <WrapperHeader>
           {/* Logo + Tên Cửa Hàng */}
           <Logo>
@@ -35,7 +38,10 @@ const HeaderComponent = () => {
     
           {/* Login + Cart */}
           <AuthCart>
-            <span>LOGIN</span>
+          <div>
+              <span onClick={() => setIsModalOpen(true)}>LOGIN</span>
+              <AuthForm visible={isModalOpen} onClose={() => setIsModalOpen(false)} />
+          </div>
             <span>CART<ShoppingCartOutlined style={{ fontSize: "30px" }} /></span>
           </AuthCart>
         </WrapperHeader>
@@ -45,11 +51,43 @@ const HeaderComponent = () => {
             <NavItem href="#">Trang chủ</NavItem>
             <NavItem href="#">Giới thiệu</NavItem>
             <NavItem href="#">Sản phẩm</NavItem>
-            <NavItem href="#">Dịch vụ</NavItem>
+            {/* Dropdown Dịch vụ */}
+        <NavItem
+          onMouseEnter={() => setShowDropdown(true)}
+          onMouseLeave={() => setShowDropdown(false)}
+        >
+          Dịch vụ ▼
+          <DropdownMenu show={showDropdown}>
+            <DropdownColumn>
+              <DropdownTitle>Điện nước</DropdownTitle>
+              <DropdownItem>Lắp đặt điện lạnh</DropdownItem>
+              <DropdownItem>Sửa chữa điện lạnh</DropdownItem>
+              <DropdownItem>Lắp đặt điện nước</DropdownItem>
+              <DropdownItem>Sửa chữa điện nước</DropdownItem>
+              <DropdownItem>Sơn bả & Thạch cao</DropdownItem>
+            </DropdownColumn>
+            <DropdownColumn>
+              <DropdownTitle>Hút bể phốt</DropdownTitle>
+              <DropdownItem>Xử lý đường ống</DropdownItem>
+              <DropdownItem>Hút vệ sinh</DropdownItem>
+              <DropdownItem>Thông tắc cống</DropdownItem>
+              <DropdownItem>Thông tắc vệ sinh</DropdownItem>
+              <DropdownItem>Thông tắc & xử lý</DropdownItem>
+            </DropdownColumn>
+            <DropdownColumn>
+              <DropdownTitle>Xây dựng nhà ở</DropdownTitle>
+              <DropdownItem>Dọn dẹp và vệ sinh</DropdownItem>
+              <DropdownItem>Chống thấm & ốp lát</DropdownItem>
+              <DropdownItem>Xử lý sự cố</DropdownItem>
+              <DropdownItem>Cơi nới & sửa chữa</DropdownItem>
+              <DropdownItem>Tư vấn & thiết kế</DropdownItem>
+            </DropdownColumn>
+          </DropdownMenu>
+        </NavItem>
             <NavItem href="#">Tin tức</NavItem>
             <NavItem href="#">Liên hệ</NavItem>
         </Navbar>
-      </>
+      </HeaderContainer>
       );
       
 }

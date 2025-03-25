@@ -2,6 +2,15 @@ import { Input } from "antd";
 import styled from "styled-components";
 import { SearchOutlined } from "@ant-design/icons";
 
+
+export const HeaderContainer = styled.div`
+  position: fixed; /* Giữ nguyên khi cuộn */
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000; /* Đảm bảo hiển thị trên các phần khác */
+`;
+
 export const WrapperHeader = styled.div`
   background-color: #d9d9d9;
   padding: 10px 50px;
@@ -9,7 +18,7 @@ export const WrapperHeader = styled.div`
   grid-template-columns: 1.5fr 1.5fr 1fr 1fr;
   align-items: center;
   gap: 50px;
-  height: 90px;
+  height: 70px;
 `;
 
 export const Logo = styled.div`
@@ -21,8 +30,8 @@ export const Logo = styled.div`
 `;
 
 export const LogoImage = styled.img`
-  width: 80px;
-  height: 80px;
+  width: 70px;
+  height: 70px;
   object-fit: contain;
   
 `;
@@ -40,7 +49,7 @@ export const SearchBar = styled(Input)`
 `;
 export const SearchIcon = styled(SearchOutlined)`
   position: absolute;
-  right: 10px;
+  right: 15px;
   font-size: 18px;
   color: gray;
   z-index: 1;
@@ -70,6 +79,7 @@ export const AuthCart = styled.div`
   justify-content: center;
   font-size: 28px;
   font-weight: bold;
+  cursor: pointer;
 `;
 
 export const Navbar = styled.div`
@@ -103,5 +113,49 @@ export const NavItem = styled.a`
   }
   &:last-child::after {
     display: none;
+  }
+`;
+
+export const DropdownMenu = styled.div`
+  position: absolute;
+  top: 50px;
+  left: 50%; 
+  transform: translateX(-40%); 
+  background: white;
+  border: 1px solid #ddd;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  gap: 20px;
+  padding: 15px;
+  display: ${(props) => (props.show ? "flex" : "none")};
+   width: 850px;
+  min-width: 600px; /* Giúp menu không bị nhỏ */
+  color: black; /* Đảm bảo chữ không bị trắng */
+`;
+
+export const DropdownColumn = styled.div`
+  min-width: 250px;
+  padding: 0 3px;
+  position: relative;
+
+  &:not(:first-child) {
+    border-left: 1px solid #000; /* Tạo dấu gạch giữa các cột */
+    padding-left: 20px; /* Tạo khoảng cách sau gạch */
+  }
+`;
+
+export const DropdownTitle = styled.div`
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-decoration: underline;
+  color: #1A427F;
+`;
+
+export const DropdownItem = styled.div`
+  padding: 5px 0 5px 10px;
+  cursor: pointer;
+  font-weight: normal;
+  &:hover {
+    text-decoration: underline;
   }
 `;
