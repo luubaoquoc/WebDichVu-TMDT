@@ -5,7 +5,11 @@ import NotFoundPage from "../pages/NotFoundPage/NotFoundPage"
 import IntroducePage from "../pages/IntroducePage/IntroducePage"
 import ContactPage from "../pages/ContactPage/ContactPage"
 import NewsPage from "../pages/NewsPage/NewsPage"
- export const routers = [
+import OrderService from "../pages/ServicePage/OrderService/OrderService"
+import RepairService from "../pages/ServicePage/RepairService/RepairService"
+import InstallationService from "../pages/ServicePage/InstallationService/InstallationService"
+
+export const routers = [
     {
         path: "/",
         page: HomePage,
@@ -34,6 +38,21 @@ import NewsPage from "../pages/NewsPage/NewsPage"
     {
         path: "/news",
         page: NewsPage,
+        isShowHeader: true
+    },
+    {
+        path: "/orderservice",
+        page: OrderService,
+        isShowHeader: true
+    },
+    {
+        path: "/repairservice",
+        page: RepairService,
+        isShowHeader: true
+    },
+    {
+        path: "/installationservice",
+        page: InstallationService,
         isShowHeader: true
     },
     {

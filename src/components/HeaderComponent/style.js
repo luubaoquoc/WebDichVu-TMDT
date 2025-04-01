@@ -82,6 +82,10 @@ export const AuthCart = styled.div`
   cursor: pointer;
 `;
 
+export const Username = styled.span`
+  font-size: 18px;
+  `
+
 export const Navbar = styled.div`
   background-color: #003366;
   padding: 10px 50px;
