@@ -1,19 +1,51 @@
-import React from "react";
-import { Form, Input, Select, DatePicker, Checkbox, Button, Breadcrumb } from "antd";
+import React, { useState } from "react";
+import { Form, Input, Select, DatePicker, Checkbox, Button, Breadcrumb, message } from "antd";
 import Sidebar from "../../../components/Sidebar/Sidebar";
 import { Container, FormWrapper, Title } from "./styleOrderService";
+import timesservices from "./TimesService";
+import { createService } from "../../../services/api";
 const { Option } = Select;
 
+
+
 const OrderService = () => {
-  const onFinish = (values) => {
-    console.log("Form Submitted:", values);
-  }
+  const [selectedService, setSelectedService] = useState(null);
+  const [availableTimeSlots, setAvailableTimeSlots] = useState([]);
+  const [loading, setLoading] = useState(false); // State để hiển thị loading khi gửi API
+
+  const handleServiceChange = (value) => {
+    setSelectedService(value);
+    if (timesservices.diennuoc.services[value]) {
+      setAvailableTimeSlots(timesservices.diennuoc.services[value].timeSlots || []);
+    } else if (timesservices.hutbephot.services[value]) {
+      setAvailableTimeSlots(timesservices.hutbephot.services[value].timeSlots || []);
+    } else {
+      setAvailableTimeSlots([]);
+    }
+  };
+ 
+
+  const onFinish = async (values) => {
+    setLoading(true); // Bật loading khi gửi API
+    try {
+      const response = await createService({
+        ...values,
+        date: values.date.format("YYYY-MM-DD"), // Chuyển ngày thành string
+      });
+
+      message.success("Đặt lịch thành công!"); // Hiển thị thông báo thành công
+      console.log("Response:", response.data);
+    } catch (error) {
+      message.error("Có lỗi xảy ra, vui lòng thử lại.");
+      console.error("Error:", error);
+    } finally {
+      setLoading(false); // Tắt loading
+    }
+  };
   return (
     <Container>
-      {/* Tiêu đề */}
       <Breadcrumb>Trang chủ / Dịch vụ / Đặt lịch dịch vụ</Breadcrumb>
       <Title>Đặt lịch dịch vụ</Title>
-      {/* Form đặt lịch */}
       <FormWrapper>
         <h2>Đặt lịch dịch vụ</h2>
         <Form layout="vertical" onFinish={onFinish}>
@@ -25,14 +57,29 @@ const OrderService = () => {
             <Input placeholder="Số điện thoại của bạn" />
           </Form.Item>
 
-          <Form.Item label="Dịch vụ" name="service" rules={[{ required: true, message: "Vui lòng chọn dịch vụ!" }]}> 
-            <Select placeholder="Chọn dịch vụ">
-              <Option value="lapdat">Lắp đặt điện lạnh</Option>
-              <Option value="suachua">Sửa chữa điện lạnh</Option>
+          <Form.Item label="Dịch vụ" name="service" rules={[{ required: true, message: "Vui lòng chọn dịch vụ!" }]}>
+            <Select placeholder="Chọn dịch vụ" onChange={handleServiceChange}>
+              {Object.keys(timesservices.diennuoc.services).map((key) => (
+                <Option key={key} value={key}>{timesservices.diennuoc.services[key].name}</Option>
+              ))}
+              {Object.keys(timesservices.hutbephot.services).map((key) => (
+                <Option key={key} value={key}>{timesservices.hutbephot.services[key].name}</Option>
+              ))}
             </Select>
           </Form.Item>
 
-          <Form.Item label="Thời gian" name="time" rules={[{ required: true, message: "Vui lòng chọn thời gian!" }]}> 
+          {/* Hiển thị khung giờ dựa trên dịch vụ được chọn */}
+          {availableTimeSlots.length > 0 && (
+            <Form.Item label="Chọn khung giờ" name="timeSlot" rules={[{ required: true, message: "Vui lòng chọn khung giờ!" }]}>
+              <Select placeholder="Chọn khung giờ">
+                {availableTimeSlots.map((slot, index) => (
+                  <Option key={index} value={slot}>{slot}</Option>
+                ))}
+              </Select>
+            </Form.Item>
+          )}
+
+          <Form.Item label="Thời gian" name="date" rules={[{ required: true, message: "Vui lòng chọn ngày!" }]}> 
             <DatePicker style={{ width: "100%" }} />
           </Form.Item>
 
@@ -48,19 +95,14 @@ const OrderService = () => {
             <Checkbox>Xác nhận thông tin</Checkbox>
           </Form.Item>
 
-          <Form.Item>
+          <Form.Item style={{ display: "flex", justifyContent: "center" }}>
             <Button type="primary" htmlType="submit">Đặt lịch</Button>
           </Form.Item>
         </Form>
       </FormWrapper>
-
-      {/* Sidebar */}
-      
-        <Sidebar />
-     
+      <Sidebar />
     </Container>
   );
-}
-
+};
 
 export default OrderService;
