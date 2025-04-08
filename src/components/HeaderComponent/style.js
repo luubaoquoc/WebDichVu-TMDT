@@ -1,6 +1,7 @@
 import { Input } from "antd";
 import styled from "styled-components";
 import { SearchOutlined } from "@ant-design/icons";
+import { Link } from "react-router-dom";
 
 
 export const HeaderContainer = styled.div`
@@ -155,10 +156,13 @@ export const DropdownTitle = styled.div`
   color: #1A427F;
 `;
 
-export const DropdownItem = styled.div`
+export const DropdownItem = styled(Link)`
+  text-decoration: none;
+  color: inherit;
   padding: 5px 0 5px 10px;
   cursor: pointer;
   font-weight: normal;
+display: flex;
   &:hover {
     text-decoration: underline;
   }

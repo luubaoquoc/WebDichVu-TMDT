@@ -1,5 +1,6 @@
 
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { WrapperHeader, Logo,LogoImage,SearchWrapper, SearchBar,SearchIcon, Hotline, HotlineText, AuthCart, Navbar, NavItem, DropdownMenu, DropdownColumn, DropdownTitle, DropdownItem, HeaderContainer, Username} from "./style";
 import {  SearchOutlined, ShoppingCartOutlined, UserOutlined } from "@ant-design/icons";
 import { Avatar, Dropdown, message } from "antd";
@@ -106,8 +107,8 @@ const menuItems = [
           <DropdownMenu show={showDropdown}>
             <DropdownColumn>
               <DropdownTitle>Điện nước</DropdownTitle>
-              <DropdownItem>Lắp đặt điện lạnh</DropdownItem>
-              <DropdownItem>Sửa chữa điện lạnh</DropdownItem>
+              <DropdownItem as={Link} to="/installationservice">Lắp đặt điện lạnh</DropdownItem>
+              <DropdownItem href="/installationservice">Sửa chữa điện lạnh</DropdownItem>
               <DropdownItem>Lắp đặt điện nước</DropdownItem>
               <DropdownItem>Sửa chữa điện nước</DropdownItem>
               <DropdownItem>Sơn bả & Thạch cao</DropdownItem>

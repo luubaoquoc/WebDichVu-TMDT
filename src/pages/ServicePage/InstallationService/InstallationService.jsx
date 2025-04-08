@@ -58,7 +58,7 @@ const InstallationService = () => {
             </tbody>
           </Table>
 
-          <ButtonStyled type="primary">Đặt lịch dịch vụ</ButtonStyled>
+          <ButtonStyled type="primary" href="/orderservice">Đặt lịch dịch vụ</ButtonStyled>
         </TextSection>
           
           <Sidebar />

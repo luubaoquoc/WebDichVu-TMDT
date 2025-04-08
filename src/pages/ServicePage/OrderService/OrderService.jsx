@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Form, Input, Select, DatePicker, Checkbox, Button, Breadcrumb, message } from "antd";
 import Sidebar from "../../../components/Sidebar/Sidebar";
-import { Container, FormWrapper, Title } from "./styleOrderService";
+import { Container, FormWrapper, TimeSlot, TimeSlotGrid, Title } from "./styleOrderService";
 import timesservices from "./TimesService";
 import { createService } from "../../../services/api";
 const { Option } = Select;
@@ -12,6 +12,9 @@ const OrderService = () => {
   const [selectedService, setSelectedService] = useState(null);
   const [availableTimeSlots, setAvailableTimeSlots] = useState([]);
   const [loading, setLoading] = useState(false); // State để hiển thị loading khi gửi API
+  const [selectedTimeSlot, setSelectedTimeSlot] = useState(null);
+  const [form] = Form.useForm();
+
 
   const handleServiceChange = (value) => {
     setSelectedService(value);
@@ -48,7 +51,7 @@ const OrderService = () => {
       <Title>Đặt lịch dịch vụ</Title>
       <FormWrapper>
         <h2>Đặt lịch dịch vụ</h2>
-        <Form layout="vertical" onFinish={onFinish}>
+        <Form layout="vertical" form={form} onFinish={onFinish}>
           <Form.Item label="Họ và tên" name="name" rules={[{ required: true, message: "Vui lòng nhập họ và tên!" }]}> 
             <Input placeholder="Họ tên của bạn" />
           </Form.Item>
@@ -69,15 +72,30 @@ const OrderService = () => {
           </Form.Item>
 
           {/* Hiển thị khung giờ dựa trên dịch vụ được chọn */}
-          {availableTimeSlots.length > 0 && (
-            <Form.Item label="Chọn khung giờ" name="timeSlot" rules={[{ required: true, message: "Vui lòng chọn khung giờ!" }]}>
-              <Select placeholder="Chọn khung giờ">
-                {availableTimeSlots.map((slot, index) => (
-                  <Option key={index} value={slot}>{slot}</Option>
-                ))}
-              </Select>
-            </Form.Item>
-          )}
+          <TimeSlotGrid>
+              {availableTimeSlots.length > 0 && (
+                <Form.Item
+                  label="Chọn khung giờ"
+                  name="timeSlot"
+                  rules={[{ required: true, message: "Vui lòng chọn khung giờ!" }]}
+                >
+                  <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: "5px" }}>
+                    {availableTimeSlots.map((slot, index) => (
+                      <TimeSlot
+                        key={index}
+                        selected={selectedTimeSlot === slot} // ✅ truyền prop selected
+                        onClick={() => {
+                          setSelectedTimeSlot(slot);
+                          form.setFieldsValue({ timeSlot: slot }); // cập nhật form
+                        }}
+                      >
+                        {slot}
+                      </TimeSlot>
+                    ))}
+                  </div>
+                </Form.Item>
+              )}
+            </TimeSlotGrid>
 
           <Form.Item label="Thời gian" name="date" rules={[{ required: true, message: "Vui lòng chọn ngày!" }]}> 
             <DatePicker style={{ width: "100%" }} />
