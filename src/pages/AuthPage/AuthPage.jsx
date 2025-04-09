@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import { Modal, Checkbox, message } from "antd";
+import Swal from "sweetalert2";
+import { validateRegister } from "../../utils/validateRegister";
+import { Modal, Checkbox } from "antd";
 import { GoogleOutlined, FacebookOutlined } from "@ant-design/icons";
 import { FormWrapper, LoginButton, SocialLogin, StyledInput } from "./Auth";
 import { registerUser, loginUser } from "../../services/api";
@@ -23,33 +25,37 @@ const AuthForm = ({ visible, onClose }) => {
     e.preventDefault();
     try {
       if (isRegister) {
+        const validation = validateRegister(formData);
+        if (!validation.valid) {
+          Swal.fire("Lỗi", validation.message, "warning");
+          return;
+        }
         const response = await registerUser(formData);
         if (response.data.status === "success") {
-          message.success("Đăng ký thành công!");
+          Swal.fire("Thành công!", "Đăng ký thành công!", "success");
           setIsRegister(false); // Chuyển về form login
         } else {
-          message.error(response.data.message);
+          Swal.fire("Lỗi", response.data.message, "error");
         }
       } else {
         const response = await loginUser({
           user_email: formData.user_email,
           user_password: formData.user_password,
         });
-        console.log("Response from loginUser:", response);
+        
         if (response.data.status === "success") {
-          console.log("response.data:", response.data);
-          console.log("response.data.data:", response.data.data);
-          localStorage.setItem("user", JSON.stringify(response.data.data)); // Lưu user vào localStorage
-          message.success("Đăng nhập thành công!");
-          window.location.reload(); // Load lại trang để cập nhật giao diện
-          onClose();
+          localStorage.setItem("user", JSON.stringify(response.data.data));
+          Swal.fire("Đăng nhập thành công!", "", "success").then(() => {
+            window.location.reload();
+            onClose();
+          });
         } else {
-          localStorage.removeItem("user"); // Xóa user khỏi localStorage nếu có
-          message.error("Email hoặc mật khẩu không đúng!");
+          localStorage.removeItem("user");
+          Swal.fire("Lỗi", "Email hoặc mật khẩu không đúng!", "error");
         }
       }
     } catch (error) {
-      message.error("Có lỗi xảy ra, vui lòng thử lại!");
+      Swal.fire("Lỗi", "Có lỗi xảy ra, vui lòng thử lại!", "error");
       console.error(error);
     }
   };

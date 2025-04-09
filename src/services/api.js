@@ -8,8 +8,15 @@ export const registerUser = async (userData) => {
 };
 
 export const loginUser = async (userData) => {
-  return axios.post(`${API_URL}/login`, userData);
+  try {
+    const response = await axios.post(`${API_URL}/login`, userData);
+    return response;
+  } catch (error) {
+    // Trả về response lỗi để frontend tự xử lý
+    return error.response;
+  }
 };
+
 
 
 export const createService = async (serviceData) => {
