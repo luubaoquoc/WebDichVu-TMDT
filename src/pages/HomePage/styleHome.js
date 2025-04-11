@@ -64,24 +64,51 @@ export const ServiceBox = styled.div`
 `;
 
 export const CategoriesContainer = styled.div`
-  margin-top: 30px;
-  font-size: 24px;
+  margin: 30px 0;
+
+  h3 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #d70018;
+    margin-bottom: 20px;
+  }
 `;
 
 export const CategoryList = styled.div`
   display: flex;
-  gap: 30px;
+  justify-content: center;
+  gap: 20px;
   overflow-x: auto;
-  justify-content: space-between;
-    margin: 30px;
+  padding: 10px 0;
 `;
 
 export const CategoryItem = styled.div`
-  width: 150px;
+  width: 190px;
+  background-color: #0f0f0f;
+  border-radius: 10px;
+  padding: 10px;
   text-align: center;
+  flex-shrink: 0;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  p {
+    font-weight: bold;
+    font-size: 14px;
+    margin-top: 10px;
+    text-transform: uppercase;
+  }
 `;
 
 export const CategoryImage = styled.img`
   width: 100%;
   height: 100px;
+  object-fit: contain;
+  border-radius: 6px;
 `;
