@@ -2,7 +2,7 @@ const products = {
   discountedProducts: [
     {
         id: 1,
-        name: 'Tủ lạnh Samsung Inverter 680 lít',
+        name: 'Tủ lạnh Samsung Inverter 680 lít ABC',
         category: 'TỦ LẠNH',
         discount: 23,
         priceOld: '18.500.000đ',
@@ -49,7 +49,7 @@ const products = {
     promotionalProducts: [
         {
             id: 1,
-            name: 'Tủ lạnh Samsung Inverter 680 lít',
+            name: 'Tủ lạnh Samsung Inverter 680 lít ABC',
             category: 'TỦ LẠNH',
             discount: 20,
             priceOld: '18.500.000đ',

@@ -34,7 +34,7 @@ const Title = styled.div`
 
 const FloatingServiceButton = () => {
   const handleClick = () => {
-    window.location.href = "/order" // hoặc chuyển hướng tới trang đặt dịch vụ bạn muốn
+    window.location.href = "/orderservice" // hoặc chuyển hướng tới trang đặt dịch vụ bạn muốn
   }
 
   return (

@@ -36,7 +36,7 @@ const Icon = styled.a`
 export default function FloatingIcons() {
   return (
     <IconWrapper>
-      <Icon href="https://zalo.me/your-zalo-id" target="_blank">
+      <Icon href="https://zalo.me/0393779138" target="_blank">
         <img src="/assets/images/zalo.png" alt="Zalo" />
       </Icon>
       <Icon href="tel:0393779138">

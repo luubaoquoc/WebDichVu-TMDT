@@ -27,7 +27,7 @@ export const SubTitle = styled.h2`
 `;
 
 export const Paragraph = styled.p`
-  font-size: 16px;
+  font-size: 18px;
   line-height: 1.6;
 `;
 
@@ -58,6 +58,6 @@ export const ServiceList = styled.ul`
 `;
 
 export const ListItem = styled.li`
-  font-size: 16px;
+  font-size: 18px;
   margin-bottom: 5px;
 `;
