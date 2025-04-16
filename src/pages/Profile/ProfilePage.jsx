@@ -1,0 +1,100 @@
+
+import React, { useEffect, useState } from "react";
+import { Form, FormGroup, Input, Label, ProfileContainer, ProfileTitle, SubmitButton } from './styleProfile';
+import { updateUser } from "../../services/api";
+
+
+
+function ProfilePage() {
+    const [user, setUser] = useState(null);
+    const [formData, setFormData] = useState({
+        user_name: "",
+        user_email: "",
+        user_phone: "",
+        user_address: "",
+    });
+
+    useEffect(() => {
+        const storedUser = localStorage.getItem("user");
+        if (storedUser) {
+            const parsedUser = JSON.parse(storedUser);
+            setUser(parsedUser);
+            setFormData({
+                user_name: parsedUser.data.user_name || "",
+                user_email: parsedUser.data.user_email || "",
+                user_phone: parsedUser.data.user_phone || "",
+                user_address: parsedUser.data.user_address || "",
+            });
+        }
+    }, []);
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData(prev => ({ ...prev, [name]: value }));
+    };
+
+    const handleUpdate = async (e) => {
+        e.preventDefault();
+
+        try {
+            const response = await updateUser(user.data._id, formData);
+            console.log(response);
+            if (response.data.status === "success") {
+                localStorage.setItem("user", JSON.stringify(response.data.data));
+                alert("Cập nhật thành công!");
+            } else {
+                alert("Có lỗi xảy ra!");
+            }
+        } catch (error) {
+            console.error(error);
+            alert("Lỗi khi gửi yêu cầu!");
+        }
+    };
+
+    return (
+        <ProfileContainer>
+            <ProfileTitle>Thông tin cá nhân</ProfileTitle>
+            <Form onSubmit={handleUpdate}>
+                <FormGroup>
+                    <Label>Họ tên:</Label>
+                    <Input
+                        type="text"
+                        name="user_name"
+                        value={formData.user_name}
+                        onChange={handleChange}
+                    />
+                </FormGroup>
+                <FormGroup>
+                    <Label>Email:</Label>
+                    <Input
+                        type="email"
+                        name="user_email"
+                        value={formData.user_email}
+                        onChange={handleChange}
+                    />
+                </FormGroup>
+                <FormGroup>
+                    <Label>Số điện thoại:</Label>
+                    <Input
+                        type="text"
+                        name="user_phone"
+                        value={formData.user_phone}
+                        onChange={handleChange}
+                    />
+                </FormGroup>
+                <FormGroup>
+                    <Label>Địa chỉ:</Label>
+                    <Input
+                        type="text"
+                        name="user_address"
+                        value={formData.user_address}
+                        onChange={handleChange}
+                    />
+                </FormGroup>
+                <SubmitButton type="submit">Cập nhật</SubmitButton>
+            </Form>
+        </ProfileContainer>
+    );
+}
+
+export default ProfilePage;

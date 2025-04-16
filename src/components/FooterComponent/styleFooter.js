@@ -5,10 +5,10 @@ export const FooterWrapper = styled.footer`
   color: white;
   padding: 40px 150px;
   font-family: Arial, sans-serif;
-
   @media (max-width: 768px) {
     padding: 40px 20px;
   }
+  
 `
 
 export const FooterContainer = styled.div`

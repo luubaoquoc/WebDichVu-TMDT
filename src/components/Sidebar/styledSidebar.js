@@ -5,11 +5,13 @@ export const SidebarContainer = styled.div`
     top: 220px;
     right: 150px;
     width: 350px;
-    height: 100vh;
+     max-height: calc(100vh - 220px);
     background-color: #f8f8f8;
     padding: 15px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: auto;
+    z-index: 10;
 `;
 
 export const SidebarSection = styled.div`

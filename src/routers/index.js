@@ -8,6 +8,8 @@ import NewsPage from "../pages/NewsPage/NewsPage"
 import OrderService from "../pages/ServicePage/OrderService/OrderService"
 import RepairService from "../pages/ServicePage/RepairService/RepairService"
 import InstallationService from "../pages/ServicePage/InstallationService/InstallationService"
+import ProfilePage from "../pages/Profile/ProfilePage"
+import AdminPage from "../pages/AdminPage/AdminPage"
 
 export const routers = [
     {
@@ -54,6 +56,17 @@ export const routers = [
         path: "/installationservice",
         page: InstallationService,
         isShowHeader: true
+    },
+    {
+        path: "/profile-user",
+        page: ProfilePage,
+        isShowHeader: true
+    },
+    {
+        path: "/admin",
+        page: AdminPage,
+        isShowHeader: true,
+        isPrivate: true
     },
     {
         path: "*",

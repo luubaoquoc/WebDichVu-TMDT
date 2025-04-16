@@ -3,6 +3,7 @@ import { Form, Input, Select, DatePicker, Checkbox, Button, Breadcrumb, message 
 import Sidebar from "../../../components/Sidebar/Sidebar";
 import { Container, FormWrapper, TimeSlot, TimeSlotGrid, Title } from "./styleOrderService";
 import timesservices from "./TimesService";
+import Swal from "sweetalert2";
 import { createService } from "../../../services/api";
 const { Option } = Select;
 
@@ -26,7 +27,7 @@ const OrderService = () => {
       setAvailableTimeSlots([]);
     }
   };
- 
+
 
   const onFinish = async (values) => {
     setLoading(true); // Bật loading khi gửi API
@@ -36,10 +37,10 @@ const OrderService = () => {
         date: values.date.format("YYYY-MM-DD"), // Chuyển ngày thành string
       });
 
-      message.success("Đặt lịch thành công!"); // Hiển thị thông báo thành công
+      Swal.fire("Thành công!", "Đặt lịch thành công!", "success");
       console.log("Response:", response.data);
     } catch (error) {
-      message.error("Có lỗi xảy ra, vui lòng thử lại.");
+      Swal.fire("Lỗi!", "Đăng ký thành công!", "error");
       console.error("Error:", error);
     } finally {
       setLoading(false); // Tắt loading
@@ -52,11 +53,11 @@ const OrderService = () => {
       <FormWrapper>
         <h2>Đặt lịch dịch vụ</h2>
         <Form layout="vertical" form={form} onFinish={onFinish}>
-          <Form.Item label="Họ và tên" name="name" rules={[{ required: true, message: "Vui lòng nhập họ và tên!" }]}> 
+          <Form.Item label="Họ và tên" name="name" rules={[{ required: true, message: "Vui lòng nhập họ và tên!" }]}>
             <Input placeholder="Họ tên của bạn" />
           </Form.Item>
 
-          <Form.Item label="Số điện thoại" name="phone" rules={[{ required: true, message: "Vui lòng nhập số điện thoại!" }]}> 
+          <Form.Item label="Số điện thoại" name="phone" rules={[{ required: true, message: "Vui lòng nhập số điện thoại!" }]}>
             <Input placeholder="Số điện thoại của bạn" />
           </Form.Item>
 
@@ -73,35 +74,35 @@ const OrderService = () => {
 
           {/* Hiển thị khung giờ dựa trên dịch vụ được chọn */}
           <TimeSlotGrid>
-              {availableTimeSlots.length > 0 && (
-                <Form.Item
-                  label="Chọn khung giờ"
-                  name="timeSlot"
-                  rules={[{ required: true, message: "Vui lòng chọn khung giờ!" }]}
-                >
-                  <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: "5px" }}>
-                    {availableTimeSlots.map((slot, index) => (
-                      <TimeSlot
-                        key={index}
-                        selected={selectedTimeSlot === slot} // ✅ truyền prop selected
-                        onClick={() => {
-                          setSelectedTimeSlot(slot);
-                          form.setFieldsValue({ timeSlot: slot }); // cập nhật form
-                        }}
-                      >
-                        {slot}
-                      </TimeSlot>
-                    ))}
-                  </div>
-                </Form.Item>
-              )}
-            </TimeSlotGrid>
+            {availableTimeSlots.length > 0 && (
+              <Form.Item
+                label="Chọn khung giờ"
+                name="timeSlot"
+                rules={[{ required: true, message: "Vui lòng chọn khung giờ!" }]}
+              >
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: "5px" }}>
+                  {availableTimeSlots.map((slot, index) => (
+                    <TimeSlot
+                      key={index}
+                      selected={selectedTimeSlot === slot} // ✅ truyền prop selected
+                      onClick={() => {
+                        setSelectedTimeSlot(slot);
+                        form.setFieldsValue({ timeSlot: slot }); // cập nhật form
+                      }}
+                    >
+                      {slot}
+                    </TimeSlot>
+                  ))}
+                </div>
+              </Form.Item>
+            )}
+          </TimeSlotGrid>
 
-          <Form.Item label="Thời gian" name="date" rules={[{ required: true, message: "Vui lòng chọn ngày!" }]}> 
+          <Form.Item label="Thời gian" name="date" rules={[{ required: true, message: "Vui lòng chọn ngày!" }]}>
             <DatePicker style={{ width: "100%" }} />
           </Form.Item>
 
-          <Form.Item label="Địa chỉ" name="address" rules={[{ required: true, message: "Vui lòng nhập địa chỉ!" }]}> 
+          <Form.Item label="Địa chỉ" name="address" rules={[{ required: true, message: "Vui lòng nhập địa chỉ!" }]}>
             <Input placeholder="Địa chỉ của bạn" />
           </Form.Item>
 
