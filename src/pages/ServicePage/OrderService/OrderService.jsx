@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Input, Select, DatePicker, Checkbox, Button, Breadcrumb, message } from "antd";
+import { Form, Input, Select, DatePicker, Checkbox, Button, Breadcrumb } from "antd";
 import Sidebar from "../../../components/Sidebar/Sidebar";
 import { Container, FormWrapper, TimeSlot, TimeSlotGrid, Title } from "./styleOrderService";
 import timesservices from "./TimesService";

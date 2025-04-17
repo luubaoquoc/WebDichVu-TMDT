@@ -7,16 +7,16 @@ import { FormWrapper, LoginButton, SocialLogin, StyledInput } from "./Auth";
 import { registerUser, loginUser } from "../../services/api";
 
 const AuthForm = ({ visible, onClose }) => {
-    const [isRegister, setIsRegister] = useState(false); // Toggle giữa Login & Register
-    const [formData, setFormData] = useState({
-      user_name: "",
-      user_email: "",
-      user_phone: "",
-      user_password: "",
-      confirm_password: "",
-    });
+  const [isRegister, setIsRegister] = useState(false); // Toggle giữa Login & Register
+  const [formData, setFormData] = useState({
+    user_name: "",
+    user_email: "",
+    user_phone: "",
+    user_password: "",
+    confirm_password: "",
+  });
 
-    // Hàm xử lý khi nhập liệu
+  // Hàm xử lý khi nhập liệu
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -42,12 +42,18 @@ const AuthForm = ({ visible, onClose }) => {
           user_email: formData.user_email,
           user_password: formData.user_password,
         });
-        
+
         if (response.data.status === "success") {
-          localStorage.setItem("user", JSON.stringify(response.data.data));
+          const userData = response.data.data;
+          localStorage.setItem("user", JSON.stringify(userData));
           Swal.fire("Đăng nhập thành công!", "", "success").then(() => {
-            window.location.reload();
+
             onClose();
+            if (userData.isAdmin) {
+              window.location.href = "/admin";
+            } else {
+              window.location.reload();
+            }
           });
         } else {
           localStorage.removeItem("user");
@@ -95,6 +101,6 @@ const AuthForm = ({ visible, onClose }) => {
       </FormWrapper>
     </Modal>
   );
-  };
-  
-  export default AuthForm;
+};
+
+export default AuthForm;

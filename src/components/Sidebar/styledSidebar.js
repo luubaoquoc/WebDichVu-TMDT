@@ -5,7 +5,6 @@ export const SidebarContainer = styled.div`
     top: 220px;
     right: 150px;
     width: 350px;
-     max-height: calc(100vh - 220px);
     background-color: #f8f8f8;
     padding: 15px;
     border-radius: 5px;

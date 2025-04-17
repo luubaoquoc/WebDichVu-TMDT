@@ -98,9 +98,9 @@ const HeaderComponent = () => {
 
       {/* Navbar dưới header */}
       <Navbar>
-        <NavItem href="/">Trang chủ</NavItem>
-        <NavItem href="/introduce">Giới thiệu</NavItem>
-        <NavItem href="/products">Sản phẩm</NavItem>
+        <NavItem as={Link} to="/">Trang chủ</NavItem>
+        <NavItem as={Link} to="/introduce">Giới thiệu</NavItem>
+        <NavItem as={Link} to="/products">Sản phẩm</NavItem>
         {/* Dropdown Dịch vụ */}
         <NavItem
           onMouseEnter={() => setShowDropdown(true)}

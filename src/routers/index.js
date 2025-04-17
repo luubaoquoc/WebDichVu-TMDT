@@ -9,7 +9,9 @@ import OrderService from "../pages/ServicePage/OrderService/OrderService"
 import RepairService from "../pages/ServicePage/RepairService/RepairService"
 import InstallationService from "../pages/ServicePage/InstallationService/InstallationService"
 import ProfilePage from "../pages/Profile/ProfilePage"
-import AdminPage from "../pages/AdminPage/AdminPage"
+import AdminDashBoard from "../pages/AdminPage/AdminDashBoard/Admin-DashBoard"
+import AdminLogin from "../pages/AdminPage/AdminLogin/AdminLogin"
+import ManagerUser from "../pages/AdminPage/AdminManagerUser/ManagerUser"
 
 export const routers = [
     {
@@ -64,9 +66,18 @@ export const routers = [
     },
     {
         path: "/admin",
-        page: AdminPage,
-        isShowHeader: true,
-        isPrivate: true
+        page: AdminLogin,
+
+    },
+    {
+        path: "/admin/dashboard",
+        page: AdminDashBoard,
+
+    },
+    {
+        path: "/admin/manager-user",
+        page: ManagerUser,
+
     },
     {
         path: "*",
