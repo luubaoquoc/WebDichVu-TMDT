@@ -23,7 +23,7 @@ const AdminLogin = () => {
             if (response.data.status === "success" && userData.data.isAdmin) {
                 localStorage.setItem("user", JSON.stringify(userData));
                 Swal.fire("Đăng nhập thành công!", "", "success").then(() => {
-                    window.location.href = "/admin-dashboard";
+                    window.location.href = "/admin/dashboard";
                 });
             } else {
                 Swal.fire("Lỗi", "Tài khoản không có quyền truy cập Admin!", "error");

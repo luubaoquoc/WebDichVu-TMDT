@@ -43,7 +43,8 @@ const HeaderComponent = () => {
   // Định nghĩa menu đúng chuẩn mới
   const menuItems = [
     { key: "1", label: "Profile", onClick: () => navigate("/profile-user") },
-    { key: "2", label: "Logout", onClick: handleLogout }
+    { key: "2", label: "OderService", onClick: () => navigate("/my-order-service") },
+    { key: "3", label: "Logout", onClick: handleLogout }
   ];
   return (
     <HeaderContainer>

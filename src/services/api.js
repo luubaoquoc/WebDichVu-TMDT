@@ -45,3 +45,30 @@ export const createService = async (serviceData) => {
   return axios.post(`${process.env.REACT_APP_API_BACKEND_URL}/service/orderservice`, serviceData);
 };
 
+export const getServiceOrders = async () => {
+  return axios.get(`${process.env.REACT_APP_API_BACKEND_URL}/service/get-orders-service`);
+};
+
+export const confirmServiceOrder = (orderId) => {
+  const token = JSON.parse(localStorage.getItem("user"))?.access_token;
+
+  return axios.patch(
+    `${process.env.REACT_APP_API_BACKEND_URL}/service/orderservice/confirm/${orderId}`,
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+};
+
+export const getMyOrders = () => {
+  const token = JSON.parse(localStorage.getItem("user"))?.access_token;
+
+  return axios.get(`${process.env.REACT_APP_API_BACKEND_URL}/service/orderservice/my-orders`, {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
+};

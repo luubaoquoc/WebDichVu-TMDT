@@ -9,9 +9,11 @@ import OrderService from "../pages/ServicePage/OrderService/OrderService"
 import RepairService from "../pages/ServicePage/RepairService/RepairService"
 import InstallationService from "../pages/ServicePage/InstallationService/InstallationService"
 import ProfilePage from "../pages/Profile/ProfilePage"
+import MyOrderService from "../pages/ServicePage/MyOrderService/MyOrderService"
 import AdminDashBoard from "../pages/AdminPage/AdminDashBoard/Admin-DashBoard"
 import AdminLogin from "../pages/AdminPage/AdminLogin/AdminLogin"
 import ManagerUser from "../pages/AdminPage/AdminManagerUser/ManagerUser"
+import AdminServiceOrder from "../pages/AdminPage/AdminServiceOrderManagement/AdminServiceOrder"
 
 export const routers = [
     {
@@ -65,6 +67,11 @@ export const routers = [
         isShowHeader: true
     },
     {
+        path: "/my-order-service",
+        page: MyOrderService,
+        isShowHeader: true
+    },
+    {
         path: "/admin",
         page: AdminLogin,
 
@@ -77,6 +84,11 @@ export const routers = [
     {
         path: "/admin/manager-user",
         page: ManagerUser,
+
+    },
+    {
+        path: "/admin/manager-service-order",
+        page: AdminServiceOrder,
 
     },
     {

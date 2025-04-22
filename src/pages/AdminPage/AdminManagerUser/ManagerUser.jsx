@@ -58,7 +58,7 @@ const UserManagement = () => {
                                 <Td>{user.isAdmin ? "Admin" : "User"}</Td>
                                 <Td>
                                     <ActionButton>Sửa</ActionButton>
-                                    <ActionButton danger>Xóa</ActionButton>
+                                    <ActionButton danger>Chặn</ActionButton>
                                 </Td>
                             </Tr>
                         ))}
