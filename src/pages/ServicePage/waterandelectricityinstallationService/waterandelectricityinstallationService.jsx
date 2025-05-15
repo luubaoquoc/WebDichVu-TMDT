@@ -1,5 +1,5 @@
 import React from "react";
-import { ButtonStyled, Container, ContentWrapper, ImageSection, SectionLi, SectionTitle, Table, TextSection, Title } from "./stylewaterandelectricityinstallationService";
+import { Breadcrumb, ButtonStyled, Container, ContentWrapper, ImageSection, SectionLi, SectionTitle, Table, TextSection, Title } from "./stylewaterandelectricityinstallationService";
 import Sidebar from "../../../components/Sidebar/Sidebar";
 
 const WaterAndElectricityInstallationService = () => {
@@ -7,6 +7,7 @@ const WaterAndElectricityInstallationService = () => {
 
     return (
         <Container>
+            <Breadcrumb>Trang chủ / Dịch vụ / Lắp đặt điện nước</Breadcrumb>
             <Title>Lắp đặt điện nước</Title>
 
             <ContentWrapper>

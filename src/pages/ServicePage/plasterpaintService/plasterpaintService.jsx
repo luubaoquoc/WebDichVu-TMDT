@@ -1,5 +1,5 @@
 import React from "react";
-import { ButtonStyled, Container, ContentWrapper, ImageSection, SectionLi, SectionTitle, Table, TextSection, Title } from "./styleplasterpaintService";
+import { Breadcrumb, ButtonStyled, Container, ContentWrapper, ImageSection, SectionLi, SectionTitle, Table, TextSection, Title } from "./styleplasterpaintService";
 import Sidebar from "../../../components/Sidebar/Sidebar";
 
 const PlasterPaintService = () => {
@@ -64,6 +64,7 @@ const PlasterPaintService = () => {
 
     return (
         <Container>
+            <Breadcrumb>Trang chủ / Dịch vụ / Sơn bả & Thạch cao</Breadcrumb>
             <Title>Sơn bả & Thạch cao</Title>
 
             <ContentWrapper>

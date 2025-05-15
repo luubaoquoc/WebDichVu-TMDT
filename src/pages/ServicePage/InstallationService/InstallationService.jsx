@@ -1,5 +1,5 @@
 import React from "react";
-import { ButtonStyled, Container, ContentWrapper, ImageSection, SectionLi, SectionTitle, Table, TextSection, Title } from "./styleinstallation";
+import { Breadcrumb, ButtonStyled, Container, ContentWrapper, ImageSection, SectionLi, SectionTitle, Table, TextSection, Title } from "./styleinstallation";
 import Sidebar from "../../../components/Sidebar/Sidebar";
 
 const InstallationService = () => {
@@ -7,6 +7,7 @@ const InstallationService = () => {
 
   return (
     <Container>
+      <Breadcrumb>Trang chủ / Dịch vụ / Lắp đặt điện lạnh</Breadcrumb>
       <Title>Lắp đặt điện lạnh</Title>
 
       <ContentWrapper>

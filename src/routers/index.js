@@ -17,6 +17,7 @@ import AdminServiceOrder from "../pages/AdminPage/AdminServiceOrderManagement/Ad
 import PlasterPaintService from "../pages/ServicePage/plasterpaintService/plasterpaintService"
 import RefrigerationRepairService from "../pages/ServicePage/refrigerationrepairService/refrigerationrepairService"
 import WaterAndElectricityInstallationService from "../pages/ServicePage/waterandelectricityinstallationService/waterandelectricityinstallationService"
+import WaterAndElectricityRepairService from "../pages/ServicePage/waterandelectricityrepairservice/waterandelectricityrepairservice"
 
 
 export const routers = [
@@ -73,6 +74,11 @@ export const routers = [
     {
         path: "/waterandelectricityinstallationservice",
         page: WaterAndElectricityInstallationService,
+        isShowHeader: true
+    },
+    {
+        path: "/waterandelectricityrepairservice",
+        page: WaterAndElectricityRepairService,
         isShowHeader: true
     },
     {

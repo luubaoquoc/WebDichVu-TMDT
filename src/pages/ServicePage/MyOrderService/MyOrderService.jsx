@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getMyOrders } from "../../../services/api";
 import { Container, Title } from "./styleMyOrderService";
 import { Table } from "antd";
+import { Breadcrumb } from "../MyOrderService/styleMyOrderService";
 
 const OrderServiceClient = () => {
     const [orders, setOrders] = useState([]);
@@ -64,6 +65,7 @@ const OrderServiceClient = () => {
 
     return (
         <Container>
+            <Breadcrumb>Trang chủ / Đơn đặt dịch vụ</Breadcrumb>
             <Title>Đơn đặt dịch vụ của bạn</Title>
             <Table dataSource={orders} columns={columns} rowKey="_id" />
         </Container>

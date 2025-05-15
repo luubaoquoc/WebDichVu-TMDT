@@ -1,14 +1,19 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-   max-width: calc(100% - 300px);
-  margin-top: 200px ;
-  padding: 0 150px;
+  width: 80%;
+  margin: 150px 0 0 150px;
+  padding: 20px 0;
 `;
 
+export const Breadcrumb = styled.p`
+  color: gray;
+  font-size: 14px;
+  margin-bottom: 10px;
+`;
 export const Title = styled.h2`
-  font-size: 24px;
-  color: #2c3e50;
-  margin-bottom: 24px;
+  font-size: 48px;
+  font-weight: bold;
+  color: #003366;
 `;
 
