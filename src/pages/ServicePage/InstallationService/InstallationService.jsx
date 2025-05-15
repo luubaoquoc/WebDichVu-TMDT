@@ -1,25 +1,19 @@
 import React from "react";
-import { ButtonStyled, Container, ContentWrapper, ImageSection, SectionLi, SectionTitle, TextSection, Title } from "./styleinstallation";
-import { Breadcrumb, Table } from "antd";
+import { ButtonStyled, Container, ContentWrapper, ImageSection, SectionLi, SectionTitle, Table, TextSection, Title } from "./styleinstallation";
 import Sidebar from "../../../components/Sidebar/Sidebar";
 
-
 const InstallationService = () => {
+
+
   return (
     <Container>
-
-
-      {/* Tiêu đề */}
-      <Breadcrumb>Trang chủ / Dịch vụ / Lắp đặt điện lạnh</Breadcrumb>
       <Title>Lắp đặt điện lạnh</Title>
 
       <ContentWrapper>
-        {/* Hình ảnh minh họa */}
         <ImageSection>
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQcE0pIYlfUNpj_tCsEGgSJdZHsnGOnAgfsw&s" alt="Dịch vụ lắp đặt điện lạnh" />
+          <img src="/assets/images/dich-vu-dien-lanh.png" alt="Dịch vụ lắp đặt điện lạnh" />
         </ImageSection>
 
-        {/* Nội dung chi tiết dịch vụ */}
         <TextSection>
           <SectionTitle>1. Thông tin dịch vụ</SectionTitle>
           <ul>
@@ -31,9 +25,9 @@ const InstallationService = () => {
           </ul>
 
           <SectionTitle>2. Thông tin kỹ thuật viên</SectionTitle>
-            <SectionLi><strong>👷 Kỹ thuật viên:</strong> Lưu Báo Quốc</SectionLi>
-            <SectionLi><strong>📞 SĐT:</strong> 0397799138</SectionLi>
-            <SectionLi><strong>⭐ Kinh nghiệm:</strong> 5 năm lắp đặt, sửa chữa</SectionLi>
+          <SectionLi><strong>👷 Kỹ thuật viên:</strong> Lưu Báo Quốc</SectionLi>
+          <SectionLi><strong>📞 SĐT:</strong> 0397799138</SectionLi>
+          <SectionLi><strong>⭐ Kinh nghiệm:</strong> 5 năm lắp đặt, sửa chữa</SectionLi>
 
           <SectionTitle>3. Bảng giá</SectionTitle>
           <Table>
@@ -42,33 +36,57 @@ const InstallationService = () => {
                 <th>STT</th>
                 <th>Dịch vụ</th>
                 <th>Đơn giá</th>
+                <th>Bảo hành</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td>1</td>
-                <td>Lắp đặt điều hòa treo tường</td>
-                <td>300.000đ</td>
+                <td>Công lắp máy lạnh 1HP - 2HP</td>
+                <td>250.000 - 400.000</td>
+                <td>12 tháng</td>
               </tr>
               <tr>
                 <td>2</td>
-                <td>Sửa chữa điện lạnh</td>
-                <td>250.000đ</td>
+                <td>Ống đồng (1HP - 2HP)</td>
+                <td>180.000 - 280.000/mét</td>
+                <td>12 tháng</td>
               </tr>
+              <tr>
+                <td>3</td>
+                <td>Dây điện 2x1.5/2x2.5mm</td>
+                <td>15.000 - 30.000/mét</td>
+                <td>12 tháng</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>Ống nước xả PVC</td>
+                <td>10.000 - 15.000/mét</td>
+                <td>12 tháng</td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td>Giá đỡ dàn nóng</td>
+                <td>100.000 - 150.000/cặp</td>
+                <td>12 tháng</td>
+              </tr>
+              <tr>
+                <td>6</td>
+                <td>Hút chân không (máy inverter)</td>
+                <td>100.000 - 200.000/lần</td>
+                <td>12 tháng</td>
+              </tr>
+
             </tbody>
           </Table>
 
           <ButtonStyled type="primary" href="/orderservice">Đặt lịch dịch vụ</ButtonStyled>
         </TextSection>
-          
-          <Sidebar />
-       
+
+        <Sidebar />
       </ContentWrapper>
-        
-     
     </Container>
   );
 }
-
 
 export default InstallationService;

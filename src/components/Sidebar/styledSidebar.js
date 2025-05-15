@@ -18,7 +18,7 @@ export const SidebarSection = styled.div`
 `;
 
 export const SidebarTitle = styled.h3`
-    font-size: 24px;
+    font-size: 32px;
     font-weight: bold;
     border-bottom: 2px solid #ff6600;
     padding-bottom: 5px;
@@ -33,7 +33,7 @@ export const SidebarList = styled.ul`
 export const SidebarListItem = styled.li`
     padding: 8px 0;
     border-bottom: 1px solid #ddd;
-    font-size: 18px;
+    font-size: 24px;
     cursor: pointer;
     transition: color 0.3s ease-in-out;
     &:hover {

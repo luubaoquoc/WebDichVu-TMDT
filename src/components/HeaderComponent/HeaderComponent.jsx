@@ -112,10 +112,10 @@ const HeaderComponent = () => {
             <DropdownColumn>
               <DropdownTitle>Điện nước</DropdownTitle>
               <DropdownItem as={Link} to="/installationservice">Lắp đặt điện lạnh</DropdownItem>
-              <DropdownItem href="/installationservice">Sửa chữa điện lạnh</DropdownItem>
-              <DropdownItem>Lắp đặt điện nước</DropdownItem>
-              <DropdownItem>Sửa chữa điện nước</DropdownItem>
-              <DropdownItem>Sơn bả & Thạch cao</DropdownItem>
+              <DropdownItem as={Link} to="/refrigerationrepairservice">Sửa chữa điện lạnh</DropdownItem>
+              <DropdownItem as={Link} to="/waterandelectricityinstallationservice">Lắp đặt điện nước</DropdownItem>
+              <DropdownItem as={Link} to="/waterandelectricityrepairservice">Sửa chữa điện nước</DropdownItem>
+              <DropdownItem as={Link} to="/plasterpaintservice">Sơn bả & Thạch cao</DropdownItem>
             </DropdownColumn>
             <DropdownColumn>
               <DropdownTitle>Hút bể phốt</DropdownTitle>
@@ -135,8 +135,8 @@ const HeaderComponent = () => {
             </DropdownColumn>
           </DropdownMenu>
         </NavItem>
-        <NavItem href="news">Tin tức</NavItem>
-        <NavItem href="contact">Liên hệ</NavItem>
+        <NavItem as={Link} to="/news">Tin tức</NavItem>
+        <NavItem as={Link} to="/contact">Liên hệ</NavItem>
       </Navbar>
     </HeaderContainer>
   );

@@ -14,6 +14,10 @@ import AdminDashBoard from "../pages/AdminPage/AdminDashBoard/Admin-DashBoard"
 import AdminLogin from "../pages/AdminPage/AdminLogin/AdminLogin"
 import ManagerUser from "../pages/AdminPage/AdminManagerUser/ManagerUser"
 import AdminServiceOrder from "../pages/AdminPage/AdminServiceOrderManagement/AdminServiceOrder"
+import PlasterPaintService from "../pages/ServicePage/plasterpaintService/plasterpaintService"
+import RefrigerationRepairService from "../pages/ServicePage/refrigerationrepairService/refrigerationrepairService"
+import WaterAndElectricityInstallationService from "../pages/ServicePage/waterandelectricityinstallationService/waterandelectricityinstallationService"
+
 
 export const routers = [
     {
@@ -59,6 +63,21 @@ export const routers = [
     {
         path: "/installationservice",
         page: InstallationService,
+        isShowHeader: true
+    },
+    {
+        path: "/refrigerationrepairservice",
+        page: RefrigerationRepairService,
+        isShowHeader: true
+    },
+    {
+        path: "/waterandelectricityinstallationservice",
+        page: WaterAndElectricityInstallationService,
+        isShowHeader: true
+    },
+    {
+        path: "/plasterpaintservice",
+        page: PlasterPaintService,
         isShowHeader: true
     },
     {
