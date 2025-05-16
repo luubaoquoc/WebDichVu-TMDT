@@ -1,5 +1,5 @@
 import React from "react";
-import { Breadcrumb, ButtonStyled, Container, ContentWrapper, ImageSection, SectionLi, SectionTitle, Table, TextSection, Title } from "./stylewaterandelectricityinstallationService";
+import { Breadcrumb, ButtonStyled, Container, ContentWrapper, ImageSection, SectionLi, SectionTitle, Table, TextSection, Title } from "../styleService";
 import Sidebar from "../../../components/Sidebar/Sidebar";
 
 const WaterAndElectricityInstallationService = () => {
@@ -26,9 +26,32 @@ const WaterAndElectricityInstallationService = () => {
                     </ul>
 
                     <SectionTitle>2. Thông tin kỹ thuật viên</SectionTitle>
-                    <SectionLi><strong>👷 Kỹ thuật viên:</strong> Lưu Báo Quốc</SectionLi>
-                    <SectionLi><strong>📞 SĐT:</strong> 0397799138</SectionLi>
-                    <SectionLi><strong>⭐ Kinh nghiệm:</strong> 5 năm lắp đặt, sửa chữa</SectionLi>
+                    <div style={{ display: 'flex', gap: '40px' }}>
+                        <div >
+                            <div style={{ textAlign: 'center' }}>
+                                <img
+                                    src="/assets/images/ky-thuat-vien-1.jpg"
+                                    alt="Kỹ thuật viên Lưu Báo Quốc"
+                                    style={{ width: '100px', height: '100px', borderRadius: '50%', objectFit: 'cover' }}
+                                />
+                            </div>
+                            <SectionLi><strong>👷 Kỹ thuật viên:</strong> Lưu Báo Quốc</SectionLi>
+                            <SectionLi><strong>📞 SĐT:</strong> 0397799138</SectionLi>
+                            <SectionLi><strong>⭐ Kinh nghiệm:</strong> 5 năm</SectionLi>
+                        </div>
+                        <div >
+                            <div style={{ textAlign: 'center' }}>
+                                <img
+                                    src="/assets/images/ky-thuat-vien-1.jpg"
+                                    alt="Kỹ thuật viên Lê Trung Sơn"
+                                    style={{ width: '100px', height: '100px', borderRadius: '50%', objectFit: 'cover' }}
+                                />
+                            </div>
+                            <SectionLi><strong>👷 Kỹ thuật viên:</strong> Lê Trung Sơn</SectionLi>
+                            <SectionLi><strong>📞 SĐT:</strong> 0397799138</SectionLi>
+                            <SectionLi><strong>⭐ Kinh nghiệm:</strong> 5 năm</SectionLi>
+                        </div>
+                    </div>
 
                     <SectionTitle>3. Bảng giá</SectionTitle>
                     <Table>

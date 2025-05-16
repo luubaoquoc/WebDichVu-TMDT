@@ -1,11 +1,13 @@
 
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Form, FormGroup, Input, Label, ProfileContainer, ProfileTitle, SubmitButton } from './styleProfile';
 import { updateUser } from "../../services/api";
 
 
 
 function ProfilePage() {
+    const navigate = useNavigate();
     const [user, setUser] = useState(null);
     const [formData, setFormData] = useState({
         user_name: "",
@@ -16,17 +18,30 @@ function ProfilePage() {
 
     useEffect(() => {
         const storedUser = localStorage.getItem("user");
-        if (storedUser) {
-            const parsedUser = JSON.parse(storedUser);
-            setUser(parsedUser);
-            setFormData({
-                user_name: parsedUser.data.user_name || "",
-                user_email: parsedUser.data.user_email || "",
-                user_phone: parsedUser.data.user_phone || "",
-                user_address: parsedUser.data.user_address || "",
-            });
+
+        if (!storedUser) {
+            navigate("/");
+            return;
         }
-    }, []);
+
+        try {
+            const parsedUser = JSON.parse(storedUser);
+            if (parsedUser?.data) {
+                setUser(parsedUser);
+                setFormData({
+                    user_name: parsedUser.data.user_name || "",
+                    user_email: parsedUser.data.user_email || "",
+                    user_phone: parsedUser.data.user_phone || "",
+                    user_address: parsedUser.data.user_address || "",
+                });
+            } else {
+                navigate("/");
+            }
+        } catch (error) {
+            console.error("Lỗi khi parse user từ localStorage:", error);
+            navigate("/");
+        }
+    }, [navigate]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -40,7 +55,9 @@ function ProfilePage() {
             const response = await updateUser(user.data._id, formData);
             console.log(response);
             if (response.data.status === "success") {
-                localStorage.setItem("user", JSON.stringify(response.data.data));
+                const updatedUser = response.data.data;
+                localStorage.setItem("user", JSON.stringify(updatedUser));
+                setUser(updatedUser);
                 alert("Cập nhật thành công!");
             } else {
                 alert("Có lỗi xảy ra!");

@@ -37,7 +37,9 @@ const HeaderComponent = () => {
   const handleLogout = () => {
     localStorage.removeItem("user");
     setUser(null);
-    Swal.fire("Thành công!", "Đăng xuất thành công!", "success");
+    Swal.fire("Thành công!", "Đăng xuất thành công!", "success").then(() => {
+      navigate("/"); // ⚠️ Sau khi logout thì chuyển về trang chủ
+    });
   };
   // / Menu dropdown khi bấm vào icon user
   // Định nghĩa menu đúng chuẩn mới
@@ -119,11 +121,11 @@ const HeaderComponent = () => {
             </DropdownColumn>
             <DropdownColumn>
               <DropdownTitle>Hút bể phốt</DropdownTitle>
-              <DropdownItem>Xử lý đường ống</DropdownItem>
-              <DropdownItem>Hút vệ sinh</DropdownItem>
-              <DropdownItem>Thông tắc cống</DropdownItem>
-              <DropdownItem>Thông tắc vệ sinh</DropdownItem>
-              <DropdownItem>Thông tắc & xử lý</DropdownItem>
+              <DropdownItem as={Link} to="/pipelineprocessingservice">Xử lý đường ống</DropdownItem>
+              <DropdownItem as={Link} to="/hygienicsuctionservice">Hút vệ sinh</DropdownItem>
+              <DropdownItem as={Link} to="/uncloggingdrainservice">Thông tắc cống</DropdownItem>
+              <DropdownItem as={Link} to="/uncloggingdrainservice">Thông tắc vệ sinh</DropdownItem>
+              <DropdownItem as={Link} to="/uncloggingdrainservice">Thông tắc & xử lý</DropdownItem>
             </DropdownColumn>
             <DropdownColumn>
               <DropdownTitle>Xây dựng nhà ở</DropdownTitle>

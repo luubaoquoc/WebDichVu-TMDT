@@ -2,90 +2,61 @@ import React from "react";
 import { Breadcrumb, ButtonStyled, Container, ContentWrapper, ImageSection, SectionLi, SectionTitle, Table, TextSection, Title } from "../styleService";
 import Sidebar from "../../../components/Sidebar/Sidebar";
 
-const RefrigerationRepairService = () => {
+const HygienicsuctionService = () => {
 
     const dataSource = [
         {
             key: 1,
-            dichvu: 'Vệ sinh máy lạnh 1HP – 2HP',
-            dongia: '200.000đ - 300.000đ',
-            baoHanh: '5 năm',
+            dichvu: 'Hút hầm cầu, bể phốt gia đình xe 1 khối',
+            dongia: '300.000 – 500.000 /xe',
+            baohanh: '5 tháng',
         },
         {
             key: 2,
-            dichvu: 'Nạp gas R22',
-            dongia: '250.000 – 400.000',
-            baoHanh: '12 tháng',
+            dichvu: 'Hút bể chứa, bùn thải, dầu mỡ)',
+            dongia: '800.000 – 1.500.000 /xe',
+            baohanh: '12 tháng',
         },
         {
             key: 3,
-            dichvu: 'Nạp gas R410A',
-            dongia: '250.000 – 400.000',
-            baoHanh: '12 tháng',
+            dichvu: 'Nạo vét hố ga, đường cống thoát chung',
+            dongia: '1.000.000 – 2.000.000 /mét dài',
+            baohanh: '12 tháng',
         },
         {
             key: 4,
-            dichvu: 'Thay block máy lạnh',
-            dongia: '1.500.000 – 2.500.000',
-            baoHanh: '8 năm',
+            dichvu: 'Lắp đặt lại đường ống mới (cấp hoặc thoát)',
+            dongia: '30.000 – 60.000/mét (công)',
+            baohanh: '8 năm',
         },
         {
             key: 5,
-            dichvu: 'Thay tụ máy lạnh',
-            dongia: '200.000 – 300.000',
-            baoHanh: '5 năm',
+            dichvu: 'Xử lý rò rỉ ống nước nổi (nối ống, thay khớp, dán keo)',
+            dongia: '80.000 – 200.000/điểm',
+            baohanh: '5 năm',
         },
-        {
-            key: 6,
-            dichvu: 'Thay cảm biến máy lạnh',
-            dongia: '200.000 – 300.000',
-            baoHanh: '8 năm',
-        },
-        {
-            key: 7,
-            dichvu: 'Thay bo mạch máy lạnh',
-            dongia: '1.500.000 – 2.500.000',
-            baoHanh: '12 tháng',
-        },
-        {
-            key: 8,
-            dichvu: 'Thay quạt dàn lạnh',
-            dongia: '200.000 – 300.000',
-            baoHanh: '5 năm',
-        },
-        {
-            key: 9,
-            dichvu: 'Thay quạt dàn nóng',
-            dongia: '200.000 – 300.000',
-            baoHanh: '8 năm',
-        },
-        {
-            key: 10,
-            dichvu: 'Thay cảm biến nhiệt độ máy lạnh',
-            dongia: '200.000 – 300.000',
-            baoHanh: '5 năm',
-        },
+
     ];
 
 
     return (
         <Container>
-            <Breadcrumb>Trang chủ / Dịch vụ / Sửa chữa điện lạnh</Breadcrumb>
-            <Title>Sửa chữa điện lạnh</Title>
+            <Breadcrumb>Trang chủ / Dịch vụ / Thông tắt cống</Breadcrumb>
+            <Title>Thông tắt cống</Title>
 
             <ContentWrapper>
                 <ImageSection>
-                    <img src="/assets/images/sua-chua-dien-lanh.jpg" alt="Dịch vụ sửa chữa điện lạnh" />
+                    <img src="/assets/images/thong-tat-cong.jpg" alt="Dịch vụ Thông tắt cống" />
                 </ImageSection>
 
                 <TextSection>
                     <SectionTitle>1. Thông tin dịch vụ</SectionTitle>
                     <ul>
-                        <SectionLi>✅ Sửa chữa máy lạnh, tủ lạnh, máy giặt, máy nước nóng chuyên nghiệp, đúng kỹ thuật.</SectionLi>
-                        <SectionLi>✅ Kiểm tra, thay linh kiện như tụ, block, bo mạch, cảm biến… chính xác và nhanh chóng.</SectionLi>
-                        <SectionLi>✅ Sử dụng linh kiện chính hãng, gas lạnh đạt chuẩn R22, R32, R410A.</SectionLi>
-                        <SectionLi>✅ Khắc phục triệt để lỗi chảy nước, kém lạnh, kêu to, không hoạt động.</SectionLi>
-                        <SectionLi>✅ Thi công sạch sẽ, đúng hẹn, có bảo hành rõ ràng sau sửa chữa.</SectionLi>
+                        <SectionLi>✅ Thông tắc cống nghẹt nhanh chóng, sạch sẽ, không đục phá.</SectionLi>
+                        <SectionLi>✅ Xử lý triệt để tình trạng tắc nghẽn do rác, dầu mỡ, cặn bẩn.</SectionLi>
+                        <SectionLi>✅ Sử dụng máy thông tắc áp lực cao, máy lò xo chuyên dụng.</SectionLi>
+                        <SectionLi>✅ Phục vụ mọi vị trí: ống thoát sàn, bồn rửa, cống ngầm, cống thoát mái.</SectionLi>
+                        <SectionLi>✅ Có mặt nhanh, báo giá trước – bảo hành rõ ràng sau thi công.</SectionLi>
                     </ul>
 
                     <SectionTitle>2. Thông tin kỹ thuật viên</SectionTitle>
@@ -116,6 +87,7 @@ const RefrigerationRepairService = () => {
                         </div>
                     </div>
 
+
                     <SectionTitle>3. Bảng giá</SectionTitle>
                     <Table>
                         <thead>
@@ -132,7 +104,7 @@ const RefrigerationRepairService = () => {
                                     <td>{row.key}</td>
                                     <td>{row.dichvu}</td>
                                     <td>{row.dongia}</td>
-                                    <td>{row.baoHanh}</td>
+                                    <td>{row.baohanh}</td>
                                 </tr>
                             ))}
                         </tbody>
@@ -148,4 +120,4 @@ const RefrigerationRepairService = () => {
     );
 }
 
-export default RefrigerationRepairService;
+export default HygienicsuctionService;

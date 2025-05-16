@@ -27,7 +27,7 @@ export const ContentWrapper = styled.div`
 export const ImageSection = styled.div`
   flex: 1;
   img {
-    width: 100%;
+    width: 98%;
     height: 500px;
     border-radius: 10px;
   }

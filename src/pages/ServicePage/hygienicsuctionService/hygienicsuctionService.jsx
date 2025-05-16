@@ -2,27 +2,61 @@ import React from "react";
 import { Breadcrumb, ButtonStyled, Container, ContentWrapper, ImageSection, SectionLi, SectionTitle, Table, TextSection, Title } from "../styleService";
 import Sidebar from "../../../components/Sidebar/Sidebar";
 
-const InstallationService = () => {
+const HygienicsuctionService = () => {
+
+  const dataSource = [
+    {
+      key: 1,
+      dichvu: 'Hút hầm cầu, bể phốt gia đình xe 1 khối',
+      dongia: '300.000 – 500.000 /xe',
+      baohanh: '5 tháng',
+    },
+    {
+      key: 2,
+      dichvu: 'Hút bể chứa, bùn thải, dầu mỡ)',
+      dongia: '800.000 – 1.500.000 /xe',
+      baohanh: '12 tháng',
+    },
+    {
+      key: 3,
+      dichvu: 'Nạo vét hố ga, đường cống thoát chung',
+      dongia: '1.000.000 – 2.000.000 /mét dài',
+      baohanh: '12 tháng',
+    },
+    {
+      key: 4,
+      dichvu: 'Lắp đặt lại đường ống mới (cấp hoặc thoát)',
+      dongia: '30.000 – 60.000/mét (công)',
+      baohanh: '8 năm',
+    },
+    {
+      key: 5,
+      dichvu: 'Xử lý rò rỉ ống nước nổi (nối ống, thay khớp, dán keo)',
+      dongia: '80.000 – 200.000/điểm',
+      baohanh: '5 năm',
+    },
+
+  ];
 
 
   return (
     <Container>
-      <Breadcrumb>Trang chủ / Dịch vụ / Lắp đặt điện lạnh</Breadcrumb>
-      <Title>Lắp đặt điện lạnh</Title>
+      <Breadcrumb>Trang chủ / Dịch vụ / Hút vệ sinh</Breadcrumb>
+      <Title>Hút vệ sinh</Title>
 
       <ContentWrapper>
         <ImageSection>
-          <img src="/assets/images/dich-vu-dien-lanh.png" alt="Dịch vụ lắp đặt điện lạnh" />
+          <img src="/assets/images/hut-ve-sinh.jpg" alt="Dịch vụ hút vệ sinh" />
         </ImageSection>
 
         <TextSection>
           <SectionTitle>1. Thông tin dịch vụ</SectionTitle>
           <ul>
-            <SectionLi>✅ Lắp đặt điều hòa (máy lạnh)</SectionLi>
-            <SectionLi>✅ Treo tường, âm trần, tủ đứng, multi, VRV/VRF...</SectionLi>
-            <SectionLi>✅ Hỗ trợ tư vấn chọn điều hòa phù hợp.</SectionLi>
-            <SectionLi>✅ Lắp đặt gọn gàng, kỹ thuật cao.</SectionLi>
-            <SectionLi>✅ Đảm bảo kỹ thuật, chống rò rỉ gas.</SectionLi>
+            <SectionLi>✅ Dịch vụ hút hầm cầu, hút bể phốt nhanh chóng, sạch sẽ.</SectionLi>
+            <SectionLi>✅ Xử lý triệt để mùi hôi, đầy nước, nghẹt ống thoát thải.</SectionLi>
+            <SectionLi>✅ Sử dụng xe bồn chuyên dụng với đầy đủ thiết bị hiện đại.</SectionLi>
+            <SectionLi>✅ Thi công đúng kỹ thuật, không đục phá, không gây mùi.</SectionLi>
+            <SectionLi>✅ Báo giá minh bạch, có mặt nhanh, bảo hành sau thi công.</SectionLi>
           </ul>
 
           <SectionTitle>2. Thông tin kỹ thuật viên</SectionTitle>
@@ -64,45 +98,17 @@ const InstallationService = () => {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>1</td>
-                <td>Công lắp máy lạnh 1HP - 2HP</td>
-                <td>250.000 - 400.000</td>
-                <td>12 tháng</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Ống đồng (1HP - 2HP)</td>
-                <td>180.000 - 280.000/mét</td>
-                <td>12 tháng</td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>Dây điện 2x1.5/2x2.5mm</td>
-                <td>15.000 - 30.000/mét</td>
-                <td>12 tháng</td>
-              </tr>
-              <tr>
-                <td>4</td>
-                <td>Ống nước xả PVC</td>
-                <td>10.000 - 15.000/mét</td>
-                <td>12 tháng</td>
-              </tr>
-              <tr>
-                <td>5</td>
-                <td>Giá đỡ dàn nóng</td>
-                <td>100.000 - 150.000/cặp</td>
-                <td>12 tháng</td>
-              </tr>
-              <tr>
-                <td>6</td>
-                <td>Hút chân không (máy inverter)</td>
-                <td>100.000 - 200.000/lần</td>
-                <td>12 tháng</td>
-              </tr>
-
+              {dataSource.map(row => (
+                <tr key={row.key}>
+                  <td>{row.key}</td>
+                  <td>{row.dichvu}</td>
+                  <td>{row.dongia}</td>
+                  <td>{row.baohanh}</td>
+                </tr>
+              ))}
             </tbody>
           </Table>
+
 
           <ButtonStyled type="primary" href="/orderservice">Đặt lịch dịch vụ</ButtonStyled>
         </TextSection>
@@ -113,4 +119,4 @@ const InstallationService = () => {
   );
 }
 
-export default InstallationService;
+export default HygienicsuctionService;

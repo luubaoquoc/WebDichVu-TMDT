@@ -6,7 +6,7 @@ import IntroducePage from "../pages/IntroducePage/IntroducePage"
 import ContactPage from "../pages/ContactPage/ContactPage"
 import NewsPage from "../pages/NewsPage/NewsPage"
 import OrderService from "../pages/ServicePage/OrderService/OrderService"
-import RepairService from "../pages/ServicePage/RepairService/RepairService"
+import HygienicsuctionService from "../pages/ServicePage/hygienicsuctionService/hygienicsuctionService"
 import InstallationService from "../pages/ServicePage/InstallationService/InstallationService"
 import ProfilePage from "../pages/Profile/ProfilePage"
 import MyOrderService from "../pages/ServicePage/MyOrderService/MyOrderService"
@@ -18,6 +18,8 @@ import PlasterPaintService from "../pages/ServicePage/plasterpaintService/plaste
 import RefrigerationRepairService from "../pages/ServicePage/refrigerationrepairService/refrigerationrepairService"
 import WaterAndElectricityInstallationService from "../pages/ServicePage/waterandelectricityinstallationService/waterandelectricityinstallationService"
 import WaterAndElectricityRepairService from "../pages/ServicePage/waterandelectricityrepairservice/waterandelectricityrepairservice"
+import PipelineProcessingService from "../pages/ServicePage/pipelineprocessingService/pipelineprocessingService"
+import UncloggingDrainService from "../pages/ServicePage/uncloggingdrainService/uncloggingdrainService"
 
 
 export const routers = [
@@ -57,8 +59,8 @@ export const routers = [
         isShowHeader: true
     },
     {
-        path: "/repairservice",
-        page: RepairService,
+        path: "/hygienicsuctionservice",
+        page: HygienicsuctionService,
         isShowHeader: true
     },
     {
@@ -82,8 +84,18 @@ export const routers = [
         isShowHeader: true
     },
     {
+        path: "/pipelineprocessingservice",
+        page: PipelineProcessingService,
+        isShowHeader: true
+    },
+    {
         path: "/plasterpaintservice",
         page: PlasterPaintService,
+        isShowHeader: true
+    },
+    {
+        path: "/uncloggingdrainservice",
+        page: UncloggingDrainService,
         isShowHeader: true
     },
     {

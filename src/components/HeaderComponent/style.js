@@ -69,16 +69,16 @@ export const Hotline = styled.div`
 export const HotlineText = styled.div`
   display: flex;
   flex-direction: column;
-  font-size: 28px;
+  font-size: 24px;
   text-align: center;
 `;
 
 export const AuthCart = styled.div`
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 10px;
   justify-content: center;
-  font-size: 28px;
+  font-size: 24px;
   font-weight: bold;
   cursor: pointer;
 `;
