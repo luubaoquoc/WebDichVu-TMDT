@@ -1,10 +1,11 @@
 import React from "react";
 import { Breadcrumb, ButtonStyled, Container, ContentWrapper, ImageSection, SectionLi, SectionTitle, Table, TextSection, Title } from "../styleService";
 import Sidebar from "../../../components/Sidebar/Sidebar";
+import { useNavigate } from "react-router-dom";
 
 const WaterAndElectricityInstallationService = () => {
 
-
+    const navigate = useNavigate();
     return (
         <Container>
             <Breadcrumb>Trang chủ / Dịch vụ / Lắp đặt điện nước</Breadcrumb>
@@ -109,7 +110,7 @@ const WaterAndElectricityInstallationService = () => {
                         </tbody>
                     </Table>
 
-                    <ButtonStyled type="primary" href="/orderservice">Đặt lịch dịch vụ</ButtonStyled>
+                    <ButtonStyled type="primary" onClick={() => navigate("/orderservice")}>Đặt lịch dịch vụ</ButtonStyled>
                 </TextSection>
 
                 <Sidebar />

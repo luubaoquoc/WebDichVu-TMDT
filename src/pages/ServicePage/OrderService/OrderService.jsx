@@ -39,8 +39,13 @@ const OrderService = () => {
 
       Swal.fire("Thành công!", "Đặt lịch thành công!", "success");
       console.log("Response:", response.data);
+
+      form.resetFields();
+      setSelectedService(null);
+      setAvailableTimeSlots([]);
+      setSelectedTimeSlot(null);
     } catch (error) {
-      Swal.fire("Lỗi!", "Đăng ký thành công!", "error");
+      Swal.fire("Lỗi!", "Đặt lịch thất bại!", "error");
       console.error("Error:", error);
     } finally {
       setLoading(false); // Tắt loading
@@ -110,7 +115,7 @@ const OrderService = () => {
             <Input.TextArea placeholder="Nhập ghi chú (nếu có)" rows={4} />
           </Form.Item>
 
-          <Form.Item name="confirm" valuePropName="checked">
+          <Form.Item name="confirm" valuePropName="checked" rules={[{ required: true, message: "Vui lòng xác nhận thông tin!" }]}>
             <Checkbox>Xác nhận thông tin</Checkbox>
           </Form.Item>
 

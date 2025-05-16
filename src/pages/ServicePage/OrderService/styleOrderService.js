@@ -49,6 +49,7 @@ export const FormWrapper = styled.div`
     padding: 8px 24px;
     width: 300px;
     font-weight: bold;
+    background-color: #003366;
   }
 `;
 

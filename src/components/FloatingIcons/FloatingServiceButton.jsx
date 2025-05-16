@@ -1,5 +1,6 @@
 import React from 'react'
-import styled from 'styled-components' // thay bằng đường dẫn ảnh của bạn
+import styled from 'styled-components'
+import { useNavigate } from 'react-router-dom'
 
 const ServiceWrapper = styled.div`
   position: fixed;
@@ -33,8 +34,10 @@ const Title = styled.div`
 `
 
 const FloatingServiceButton = () => {
+  const navigate = useNavigate();
+
   const handleClick = () => {
-    window.location.href = "/orderservice" // hoặc chuyển hướng tới trang đặt dịch vụ bạn muốn
+    navigate('/orderservice');
   }
 
   return (

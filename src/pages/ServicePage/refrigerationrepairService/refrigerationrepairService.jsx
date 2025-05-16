@@ -1,9 +1,10 @@
 import React from "react";
 import { Breadcrumb, ButtonStyled, Container, ContentWrapper, ImageSection, SectionLi, SectionTitle, Table, TextSection, Title } from "../styleService";
 import Sidebar from "../../../components/Sidebar/Sidebar";
+import { useNavigate } from "react-router-dom";
 
 const RefrigerationRepairService = () => {
-
+    const navigate = useNavigate();
     const dataSource = [
         {
             key: 1,
@@ -139,7 +140,7 @@ const RefrigerationRepairService = () => {
                     </Table>
 
 
-                    <ButtonStyled type="primary" href="/orderservice">Đặt lịch dịch vụ</ButtonStyled>
+                    <ButtonStyled type="primary" onClick={() => navigate("/orderservice")}>Đặt lịch dịch vụ</ButtonStyled>
                 </TextSection>
 
                 <Sidebar />

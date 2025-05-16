@@ -13,12 +13,12 @@ export const Header = styled.div`
 `;
 
 export const Title = styled.h3`
-  color: #e80000;
+  color: #003366;
   font-size: 22px;
 `;
 
 export const ViewMore = styled.span`
-  color: #e80000;
+  color: #003366;
   font-weight: bold;
   cursor: pointer;
   font-size: 15px;
@@ -89,7 +89,7 @@ export const NewPrice = styled.span`
 `;
 
 export const BuyButton = styled.button`
-  background: #e80000;
+  background: #003366;
   color: white;
   padding: 6px 14px;
   border: none;
@@ -99,6 +99,6 @@ export const BuyButton = styled.button`
   transition: 0.3s;
 
   &:hover {
-    background: #c40000;
+    background: #003366;
   }
 `;

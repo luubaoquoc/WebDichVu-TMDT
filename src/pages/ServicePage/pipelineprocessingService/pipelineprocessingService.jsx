@@ -1,9 +1,10 @@
 import React from "react";
 import { Breadcrumb, ButtonStyled, Container, ContentWrapper, ImageSection, SectionLi, SectionTitle, Table, TextSection, Title } from "../styleService";
 import Sidebar from "../../../components/Sidebar/Sidebar";
+import { useNavigate } from "react-router-dom";
 
 const PipelineProcessingService = () => {
-
+    const navigate = useNavigate();
     const dataSource = [
         {
             key: 1,
@@ -109,7 +110,7 @@ const PipelineProcessingService = () => {
                     </Table>
 
 
-                    <ButtonStyled type="primary" href="/orderservice">Đặt lịch dịch vụ</ButtonStyled>
+                    <ButtonStyled type="primary" onClick={() => navigate("/orderservice")}>Đặt lịch dịch vụ</ButtonStyled>
                 </TextSection>
 
                 <Sidebar />

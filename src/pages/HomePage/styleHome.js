@@ -69,7 +69,7 @@ export const CategoriesContainer = styled.div`
   h3 {
     font-size: 24px;
     font-weight: bold;
-    color: #d70018;
+    color: #003366;
     margin-bottom: 20px;
   }
 `;

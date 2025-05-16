@@ -42,7 +42,18 @@ export const getAllUser = async () => {
 
 
 export const createService = async (serviceData) => {
-  return axios.post(`${process.env.REACT_APP_API_BACKEND_URL}/service/orderservice`, serviceData);
+  const token = JSON.parse(localStorage.getItem("user"))?.access_token;
+  console.log(token)
+
+  return axios.post(
+    `${process.env.REACT_APP_API_BACKEND_URL}/service/orderservice`,
+    serviceData,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
 };
 
 export const getServiceOrders = async () => {
@@ -61,6 +72,12 @@ export const confirmServiceOrder = (orderId) => {
       },
     }
   );
+};
+
+
+export const getProducts = async (limit = 12, page = 0) => {
+  const response = await axios.get(`${process.env.REACT_APP_API_BACKEND_URL}/product/all-product?limit=${limit}&page=${page}`);
+  return response.data;
 };
 
 export const getMyOrders = () => {
