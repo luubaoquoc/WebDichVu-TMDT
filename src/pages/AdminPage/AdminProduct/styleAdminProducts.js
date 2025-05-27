@@ -1,19 +1,17 @@
+// src/pages/AdminPage/AdminProducts/styleAdminProducts.js
 import styled from "styled-components";
 
 export const Container = styled.div`
-  padding: 10px 30px;
-  background: #f8f9fc;
-  height: 100%;
-  margin-top: 60px; /* Adjust based on your header height */
+  padding: 20px;
+  margin-top: 60px; 
 `;
 
 export const Header = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 `;
-
 export const CreateButton = styled.button`
   padding: 8px 16px;
   background-color: #2ecc71;
@@ -27,7 +25,6 @@ export const CreateButton = styled.button`
     background-color: #27ae60;
   }
 `;
-
 export const Title = styled.h2`
   font-size: 24px;
   margin-bottom: 20px;
@@ -49,6 +46,7 @@ export const Th = styled.th`
   color: white;
 `;
 
+
 export const Tr = styled.tr`
   &:nth-child(even) {
     background: #f2f2f2;
@@ -61,14 +59,10 @@ export const Td = styled.td`
 
 export const ActionButton = styled.button`
   padding: 6px 12px;
-  margin-right: 10px;
-  border: none;
-  background-color: ${(props) => (props.danger ? "#e74a3b" : "#1cc88a")};
+  margin-right: 8px;
+  background-color: ${props => props.danger ? "#e74c3c" : "#3498db"};
   color: white;
-  cursor: pointer;
+  border: none;
   border-radius: 4px;
-
-  &:hover {
-    opacity: 0.9;
-  }
+  cursor: pointer;
 `;

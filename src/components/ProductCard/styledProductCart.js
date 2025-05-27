@@ -8,29 +8,29 @@ export const Card = styled.div`
   text-align: center;
   background-color: #fff;
   transition: transform 0.2s ease;
-
+position: relative;
   &:hover {
     transform: translateY(-2px);
   }
 `;
 
-export const ImageWrapper = styled.div`
-  position: relative;
+export const Image = styled.img`
   width: 100%;
-  height: 200px;
-  overflow: hidden;
+  height: 130px;
+  object-fit: contain;
+  margin-bottom: 10px;
 `;
 
-
-export const DiscountBadge = styled.span`
+export const DiscountBadge = styled.div`
   position: absolute;
-  top: 0;
-  left: 0;
-  background-color: #dc2626;
-  color: #fff;
+  top: 10px;
+  left: 10px;
+  background: red;
+  color: white;
+  padding: 2px 6px;
   font-size: 12px;
-  padding: 4px 8px;
-  border-radius: 0 0 8px 0;
+  font-weight: bold;
+  border-radius: 3px;
 `;
 
 export const ProductImage = styled.img`
@@ -65,15 +65,16 @@ export const OldPrice = styled.div`
 
 export const BuyButton = styled.button`
   margin-top: 12px;
-  background-color: #dc2626;
+  background-color: #003366;
   color: #fff;
   padding: 8px 16px;
   border-radius: 6px;
   border: none;
   cursor: pointer;
+  font-weight: bold;
   transition: background-color 0.2s ease;
 
   &:hover {
-    background-color: #b91c1c;
+    background-color: #0000FF;
   }
 `;

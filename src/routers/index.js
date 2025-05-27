@@ -13,6 +13,7 @@ import MyOrderService from "../pages/ServicePage/MyOrderService/MyOrderService"
 import AdminDashBoard from "../pages/AdminPage/AdminDashBoard/Admin-DashBoard"
 import AdminLogin from "../pages/AdminPage/AdminLogin/AdminLogin"
 import ManagerUser from "../pages/AdminPage/AdminManagerUser/ManagerUser"
+import AdminProducts from "../pages/AdminPage/AdminProduct/AdminProduct"
 import AdminServiceOrder from "../pages/AdminPage/AdminServiceOrderManagement/AdminServiceOrder"
 import PlasterPaintService from "../pages/ServicePage/plasterpaintService/plasterpaintService"
 import RefrigerationRepairService from "../pages/ServicePage/refrigerationrepairService/refrigerationrepairService"
@@ -121,6 +122,11 @@ export const routers = [
     {
         path: "/admin/manager-user",
         page: ManagerUser,
+
+    },
+    {
+        path: "/admin/products",
+        page: AdminProducts,
 
     },
     {

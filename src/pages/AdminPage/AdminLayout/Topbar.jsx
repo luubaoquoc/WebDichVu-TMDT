@@ -3,7 +3,6 @@ import { TopbarContainer, TopbarSearch, UserSection, UserAvatar } from "./AdminS
 
 const Topbar = () => {
     const user = JSON.parse(localStorage.getItem("user"))
-    console.log(user)
     return (
         <TopbarContainer>
             <TopbarSearch placeholder="Search..." />

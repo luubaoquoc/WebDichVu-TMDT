@@ -1,16 +1,11 @@
 import React from 'react';
-import { Brand, BuyButton, Card, DiscountBadge, ImageWrapper, OldPrice, Price, ProductImage, ProductName } from './styledProductCart';
+import { Brand, BuyButton, Card, DiscountBadge, Image, OldPrice, Price, ProductName } from './styledProductCart';
 
 const ProductCard = ({ product }) => {
     return (
         <Card>
-            <ImageWrapper>
-                {product.discount && <DiscountBadge>-{product.discount}%</DiscountBadge>}
-                <ProductImage
-                    src={product.product_image}
-                    alt={product.product_name}
-                />
-            </ImageWrapper>
+            <DiscountBadge>-{product.product_discount}%</DiscountBadge>
+            <Image src={product.product_image} alt={product.name} />
             <Brand>{product.product_brand}</Brand>
             <ProductName>{product.product_name}</ProductName>
             <Price>{product.product_price.toLocaleString()}₫</Price>

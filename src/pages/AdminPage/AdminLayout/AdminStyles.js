@@ -29,7 +29,7 @@ export const SidebarLogo = styled.div`
 export const SidebarItem = styled.div`
   padding: 12px 24px;
   cursor: pointer;
-  font-size:18px;
+  font-size: 24px;
   color: white;
   text-decoration: none;
   &:hover {
@@ -53,6 +53,11 @@ export const TopbarContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 0 20px;
+  position: fixed;
+  top: 0;
+  left: 250px;
+  right: 0;
+  z-index: 1000;
 `;
 
 export const TopbarSearch = styled.input`

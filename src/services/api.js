@@ -15,6 +15,10 @@ export const loginUser = async (userData) => {
   }
 };
 
+export const getUserDetails = (id) => {
+  return axios.get(`${process.env.REACT_APP_API_BACKEND_URL}/user/get-details/${id}`);
+};
+
 export const updateUser = async (user_id, userData) => {
   return axios.put(`${process.env.REACT_APP_API_BACKEND_URL}/user/update-user/${user_id}`,
     userData,
@@ -77,6 +81,14 @@ export const confirmServiceOrder = (orderId) => {
 
 export const getProducts = async (limit = 12, page = 0) => {
   const response = await axios.get(`${process.env.REACT_APP_API_BACKEND_URL}/product/all-product?limit=${limit}&page=${page}`);
+  return response.data;
+};
+
+export const createProduct = async (productData) => {
+  const response = await axios.post(
+    `${process.env.REACT_APP_API_BACKEND_URL}/product/create-product`,
+    productData
+  );
   return response.data;
 };
 
