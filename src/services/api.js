@@ -44,6 +44,19 @@ export const getAllUser = async () => {
   );
 };
 
+export const blockUser = async (userId, isBlocked) => {
+  const token = JSON.parse(localStorage.getItem("user"))?.access_token;
+
+  return axios.patch(
+    `${process.env.REACT_APP_API_BACKEND_URL}/user/block/${userId}`,
+    { isBlocked },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+}
 
 export const createService = async (serviceData) => {
   const token = JSON.parse(localStorage.getItem("user"))?.access_token;
