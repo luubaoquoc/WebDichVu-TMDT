@@ -16,9 +16,18 @@ export const loginUser = async (userData) => {
 };
 
 export const getUserDetails = (id) => {
-  return axios.get(`${process.env.REACT_APP_API_BACKEND_URL}/user/get-details/${id}`);
+  const token = JSON.parse(localStorage.getItem("user"))?.access_token;
+  return axios.get(
+    `${process.env.REACT_APP_API_BACKEND_URL}/user/get-details/${id}`,
+    token
+      ? {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+      : undefined
+  );
 };
-
 export const updateUser = async (user_id, userData) => {
   return axios.put(`${process.env.REACT_APP_API_BACKEND_URL}/user/update-user/${user_id}`,
     userData,
@@ -60,7 +69,7 @@ export const blockUser = async (userId, isBlocked) => {
 
 export const createService = async (serviceData) => {
   const token = JSON.parse(localStorage.getItem("user"))?.access_token;
-  console.log(token)
+  console.log("token:", token);
 
   return axios.post(
     `${process.env.REACT_APP_API_BACKEND_URL}/service/orderservice`,

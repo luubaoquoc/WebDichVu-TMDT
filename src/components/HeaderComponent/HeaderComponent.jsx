@@ -6,6 +6,7 @@ import { SearchOutlined, ShoppingCartOutlined, UserOutlined } from "@ant-design/
 import { Avatar, Dropdown } from "antd";
 import Swal from "sweetalert2";
 import AuthForm from "../../pages/AuthPage/AuthPage";
+import { getUserDetails } from "../../services/api";
 
 const HeaderComponent = () => {
   const [showDropdown, setShowDropdown] = useState(false);
@@ -20,6 +21,7 @@ const HeaderComponent = () => {
     if (storedUser) {
       try {
         const parsedUser = JSON.parse(storedUser);
+        console.log("Giá trị user từ localStorage:", parsedUser); // Để xem giá trị khi load từ localStorage
         setUser(parsedUser);
       } catch (error) {
         console.error("Lỗi khi parse JSON từ localStorage:", error);

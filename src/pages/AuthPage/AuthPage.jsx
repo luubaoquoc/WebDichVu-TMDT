@@ -47,18 +47,23 @@ const AuthForm = ({ visible, onClose }) => {
           const userData = response.data.data;
           localStorage.setItem("user", JSON.stringify(userData));
           Swal.fire("Đăng nhập thành công!", "", "success").then(() => {
+            window.location.reload();
 
-            onClose();
-            if (userData.isAdmin) {
-              window.location.href = "/admin";
-            } else {
-              window.location.reload();
-            }
           });
         } else {
           localStorage.removeItem("user");
-          Swal.fire("Lỗi", "Email hoặc mật khẩu không đúng!", "error");
+          const message = response.data.message;
+
+          // Kiểm tra message từ backend
+          if (message === "User is blocked") {
+            Swal.fire("Tài khoản bị khóa", "Vui lòng liên hệ quản trị viên", "error");
+          } else if (message === "User not found" || message === "Password is incorrect") {
+            Swal.fire("Lỗi", "Email hoặc mật khẩu không đúng!", "error");
+          } else {
+            Swal.fire("Lỗi", message || "Đăng nhập thất bại", "error");
+          }
         }
+
       }
     } catch (error) {
       Swal.fire("Lỗi", "Có lỗi xảy ra, vui lòng thử lại!", "error");
@@ -81,7 +86,7 @@ const AuthForm = ({ visible, onClose }) => {
         {!isRegister && (
           <div style={{ width: "100%", display: "flex", justifyContent: "space-between" }}>
             <Checkbox>Remember Password</Checkbox>
-            <a href="#">Forgot Password?</a>
+            <a href="#forgot-password">Forgot Password?</a>
           </div>
         )}
 

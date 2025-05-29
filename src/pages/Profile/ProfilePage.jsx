@@ -18,6 +18,7 @@ function ProfilePage() {
 
     useEffect(() => {
         const storedUser = localStorage.getItem("user");
+        console.log("Stored user:", storedUser);
 
         if (!storedUser) {
             navigate("/");
@@ -26,13 +27,13 @@ function ProfilePage() {
 
         try {
             const parsedUser = JSON.parse(storedUser);
-            if (parsedUser?.data) {
+            if (parsedUser) {
                 setUser(parsedUser);
                 setFormData({
-                    user_name: parsedUser.data.user_name || "",
-                    user_email: parsedUser.data.user_email || "",
-                    user_phone: parsedUser.data.user_phone || "",
-                    user_address: parsedUser.data.user_address || "",
+                    user_name: parsedUser.user_name || "",
+                    user_email: parsedUser.user_email || "",
+                    user_phone: parsedUser.user_phone || "",
+                    user_address: parsedUser.user_address || "",
                 });
             } else {
                 navigate("/");
@@ -52,10 +53,11 @@ function ProfilePage() {
         e.preventDefault();
 
         try {
-            const response = await updateUser(user.data._id, formData);
+            const response = await updateUser(user._id, formData);
+            console.log("Update response:", response);
             console.log(response);
             if (response.data.status === "success") {
-                const updatedUser = response.data.data;
+                const updatedUser = response.data.data.data;
                 localStorage.setItem("user", JSON.stringify(updatedUser));
                 setUser(updatedUser);
                 alert("Cập nhật thành công!");
