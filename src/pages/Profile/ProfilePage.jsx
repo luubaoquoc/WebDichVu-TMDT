@@ -1,8 +1,10 @@
 
 import React, { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { Form, FormGroup, Input, Label, ProfileContainer, ProfileTitle, SubmitButton } from './styleProfile';
 import { updateUser } from "../../services/api";
+import ChangePasswordModal from "../../components/Modals/Users/ChangePassword/ChangePassword";
 
 
 
@@ -16,9 +18,10 @@ function ProfilePage() {
         user_address: "",
     });
 
+    const [showModal, setShowModal] = useState(false);
+
     useEffect(() => {
         const storedUser = localStorage.getItem("user");
-        console.log("Stored user:", storedUser);
 
         if (!storedUser) {
             navigate("/");
@@ -30,10 +33,10 @@ function ProfilePage() {
             if (parsedUser) {
                 setUser(parsedUser);
                 setFormData({
-                    user_name: parsedUser.user_name || "",
-                    user_email: parsedUser.user_email || "",
-                    user_phone: parsedUser.user_phone || "",
-                    user_address: parsedUser.user_address || "",
+                    user_name: parsedUser.data.user_name || "",
+                    user_email: parsedUser.data.user_email || "",
+                    user_phone: parsedUser.data.user_phone || "",
+                    user_address: parsedUser.data.user_address || "",
                 });
             } else {
                 navigate("/");
@@ -53,20 +56,31 @@ function ProfilePage() {
         e.preventDefault();
 
         try {
-            const response = await updateUser(user._id, formData);
+            const response = await updateUser(user.data._id, formData);
             console.log("Update response:", response);
-            console.log(response);
+
             if (response.data.status === "success") {
-                const updatedUser = response.data.data.data;
+                // Lấy user cũ từ localStorage để giữ lại token
+                const oldUser = JSON.parse(localStorage.getItem("user"));
+
+                // Tạo object user mới: giữ token, cập nhật data
+                const updatedUser = {
+                    ...oldUser,
+                    ...response.data.data
+
+                };
+
+                // Cập nhật localStorage và state
                 localStorage.setItem("user", JSON.stringify(updatedUser));
                 setUser(updatedUser);
-                alert("Cập nhật thành công!");
+
+                Swal.fire("Thành công!", "Cập nhật thành công!", "success");
             } else {
-                alert("Có lỗi xảy ra!");
+                Swal.fire("Lỗi", "Có lỗi xảy ra khi cập nhật.", "error");
             }
         } catch (error) {
             console.error(error);
-            alert("Lỗi khi gửi yêu cầu!");
+            Swal.fire("Lỗi", "Lỗi khi gửi yêu cầu!", "error");
         }
     };
 
@@ -110,8 +124,18 @@ function ProfilePage() {
                         onChange={handleChange}
                     />
                 </FormGroup>
-                <SubmitButton type="submit">Cập nhật</SubmitButton>
+                <div style={{ display: "flex", gap: "10px" }}>
+                    <SubmitButton type="submit">Cập nhật</SubmitButton>
+                    <button
+                        type="button"
+                        onClick={() => setShowModal(true)}
+                        style={{ backgroundColor: "#eee", padding: "8px", borderRadius: "5px", border: "none" }}
+                    >
+                        Đổi mật khẩu
+                    </button>
+                </div>
             </Form>
+            <ChangePasswordModal isOpen={showModal} onClose={() => setShowModal(false)} />
         </ProfileContainer>
     );
 }

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { updateUser, getUserDetails } from "../../../../services/api";
+import Swal from "sweetalert2";
 import {
     Button,
     CheckboxLabel,
@@ -13,7 +14,9 @@ import {
     ModalBackground,
     ModalContent,
     CloseButton,
+    ErrorMessage,
 } from "./styleEditUser";
+import { validateEdit } from "../../../../utils/validateRegister";
 
 const EditUserModal = ({ userId, isOpen, onClose, onUpdateSuccess }) => {
     const [user, setUser] = useState(null);
@@ -24,6 +27,8 @@ const EditUserModal = ({ userId, isOpen, onClose, onUpdateSuccess }) => {
         user_address: "",
         isAdmin: false,
     });
+
+    const [errors, setErrors] = useState({});
 
     useEffect(() => {
         if (isOpen) {
@@ -57,14 +62,20 @@ const EditUserModal = ({ userId, isOpen, onClose, onUpdateSuccess }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        const validation = validateEdit(formData);
+        if (!validation.valid) {
+            setErrors(validation.errors);
+            return;
+        }
         try {
             const res = await updateUser(userId, formData);
             if (res.data.status === "success") {
-                alert("Cập nhật thành công!");
+                Swal.fire("Thành công!", "Cập nhật thành công!", "success");
                 if (onUpdateSuccess) onUpdateSuccess();
                 onClose();
             } else {
-                alert("Có lỗi xảy ra khi cập nhật.");
+                Swal.fire("Lỗi", "Có lỗi xảy ra khi cập nhật.", "error");
             }
         } catch (err) {
             console.error("Cập nhật thất bại:", err);
@@ -92,6 +103,7 @@ const EditUserModal = ({ userId, isOpen, onClose, onUpdateSuccess }) => {
                                     value={formData.user_name}
                                     onChange={handleChange}
                                 />
+                                {errors.user_name && <ErrorMessage>{errors.user_name}</ErrorMessage>}
                             </FormGroup>
 
                             <FormGroup>
@@ -103,6 +115,7 @@ const EditUserModal = ({ userId, isOpen, onClose, onUpdateSuccess }) => {
                                     value={formData.user_email}
                                     onChange={handleChange}
                                 />
+                                {errors.user_email && <ErrorMessage>{errors.user_email}</ErrorMessage>}
                             </FormGroup>
 
                             <FormGroup>
@@ -114,6 +127,7 @@ const EditUserModal = ({ userId, isOpen, onClose, onUpdateSuccess }) => {
                                     value={formData.user_phone}
                                     onChange={handleChange}
                                 />
+                                {errors.user_phone && <ErrorMessage>{errors.user_phone}</ErrorMessage>}
                             </FormGroup>
                             <FormGroup>
                                 <Label htmlFor="user_address">Địa chỉ:</Label>

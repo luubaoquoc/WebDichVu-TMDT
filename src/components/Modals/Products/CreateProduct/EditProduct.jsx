@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import {
     ModalBackground,
@@ -11,49 +11,62 @@ import {
     Input,
     Button,
 } from "./styleCreateProduct";
+import { getProductDetails, updateProduct } from "../../../../services/api";
 
-const CreateProductModal = ({ onClose, onSubmit }) => {
+const EditProductModal = ({ onClose, productId, onUpdate }) => {
     const [formData, setFormData] = useState({
-
         product_name: "",
         product_brand: "",
         product_category: "",
         product_price: "",
         product_countInStock: "",
-        product_image: null,
+        product_image: "",
         product_description: "",
     });
 
-    const handleChange = (e) => {
-        const { name, value, files } = e.target;
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const data = await getProductDetails(productId);
+                console.log("Product data:", data);
+                setFormData({
+                    product_name: data.data.data.product_name || "",
+                    product_brand: data.data.data.product_brand || "",
+                    product_category: data.data.data.product_category || "",
+                    product_price: data.data.data.product_price || "",
+                    product_countInStock: data.data.data.product_countInStock || "",
+                    product_image: data.data.data.product_image || "",
+                    product_description: data.data.data.product_description || "",
+                });
+            } catch (error) {
+                Swal.fire("Lỗi", "Không thể tải dữ liệu sản phẩm.", "error");
+            }
+        };
 
-        if (name === "product_image") {
-            setFormData((prev) => ({
-                ...prev,
-                product_image: files[0], // chỉ lấy 1 file
-            }));
-        } else {
-            setFormData((prev) => ({
-                ...prev,
-                [name]: value,
-            }));
-        }
+        if (productId) fetchData();
+    }, [productId]);
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prev) => ({ ...prev, [name]: value }));
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         try {
-            const data = new FormData();
-            for (let key in formData) {
-                data.append(key, formData[key]);
-            }
 
-            await onSubmit(data); // truyền FormData
-            Swal.fire("Thành công!", "Tạo sản phẩm thành công!", "success");
-            onClose();
+            const result = await updateProduct(productId, formData);
+
+            if (result.status === "success") {
+                Swal.fire("Thành công!", "Cập nhật sản phẩm thành công!", "success");
+                onUpdate?.();
+                onClose();
+            } else {
+                Swal.fire("Lỗi", result.message || "Cập nhật thất bại", "error");
+            }
         } catch (error) {
-            Swal.fire("Lỗi", "Tạo sản phẩm thất bại!", "error");
+            Swal.fire("Lỗi", "Đã xảy ra lỗi khi cập nhật!", "error");
         }
     };
 
@@ -61,8 +74,9 @@ const CreateProductModal = ({ onClose, onSubmit }) => {
         <ModalBackground>
             <ModalContent>
                 <CloseButton onClick={onClose}>×</CloseButton>
-                <Title>Create new product</Title>
+                <Title>Edit product</Title>
                 <Form onSubmit={handleSubmit}>
+                    {/* Các input như cũ */}
                     <FormGroup>
                         <Label>Product Name</Label>
                         <Input
@@ -116,9 +130,9 @@ const CreateProductModal = ({ onClose, onSubmit }) => {
                     <FormGroup>
                         <Label>Image</Label>
                         <Input
-                            type="file"
+                            type="text"
                             name="product_image"
-                            accept="image/*"
+                            value={formData.product_image}
                             onChange={handleChange}
                             required
                         />
@@ -133,11 +147,12 @@ const CreateProductModal = ({ onClose, onSubmit }) => {
                             required
                         />
                     </FormGroup>
-                    <Button type="submit">Create</Button>
+                    {/* Các form group khác giống như CreateProductModal */}
+                    <Button type="submit">Update</Button>
                 </Form>
             </ModalContent>
         </ModalBackground>
     );
 };
 
-export default CreateProductModal;
+export default EditProductModal;

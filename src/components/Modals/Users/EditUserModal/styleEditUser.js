@@ -47,9 +47,9 @@ export const Container = styled.div`
 `;
 
 export const Title = styled.h2`
-  margin-bottom: 24px;
+  margin-bottom: 30px;
   font-size: 28px;
-  color: #333;
+  color: #4e73df;
 `;
 
 export const Form = styled.form`
@@ -102,6 +102,7 @@ export const Button = styled.button`
   font-weight: 600;
   border-radius: 4px;
   cursor: pointer;
+  width: 100%;
   transition: background-color 0.3s ease;
   align-self: flex-start;
 
@@ -114,4 +115,10 @@ export const LoadingText = styled.p`
   padding: 20px;
   font-size: 18px;
   color: #777;
+`;
+
+export const ErrorMessage = styled.div`
+    color: red;
+    font-size: 0.875rem;
+    margin-top: 4px;
 `;

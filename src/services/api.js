@@ -29,11 +29,28 @@ export const getUserDetails = (id) => {
   );
 };
 export const updateUser = async (user_id, userData) => {
+  const token = JSON.parse(localStorage.getItem("user"))?.access_token;
+
   return axios.put(`${process.env.REACT_APP_API_BACKEND_URL}/user/update-user/${user_id}`,
     userData,
     {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+};
+
+export const changePassword = async (userData) => {
+  const token = JSON.parse(localStorage.getItem("user"))?.access_token;
+  console.log("token:", token);
+  console.log(JSON.parse(localStorage.getItem("user")))
+  return axios.post(
+    `${process.env.REACT_APP_API_BACKEND_URL}/user/change-password`,
+    userData,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
       },
     }
   );
@@ -59,6 +76,20 @@ export const blockUser = async (userId, isBlocked) => {
   return axios.patch(
     `${process.env.REACT_APP_API_BACKEND_URL}/user/block/${userId}`,
     { isBlocked },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+}
+
+export const unBlockUser = async (userId) => {
+  const token = JSON.parse(localStorage.getItem("user"))?.access_token;
+
+  return axios.patch(
+    `${process.env.REACT_APP_API_BACKEND_URL}/user/unblock/${userId}`,
+    {},
     {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -107,11 +138,67 @@ export const getProducts = async (limit = 12, page = 0) => {
 };
 
 export const createProduct = async (productData) => {
+  const token = JSON.parse(localStorage.getItem("user"))?.access_token;
   const response = await axios.post(
     `${process.env.REACT_APP_API_BACKEND_URL}/product/create-product`,
-    productData
+    productData,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
   );
   return response.data;
+};
+
+export const getProductDetails = async (id) => {
+  try {
+    const response = await axios.get(`${process.env.REACT_APP_API_BACKEND_URL}/product/details-product/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error("Lỗi khi lấy chi tiết sản phẩm:", error);
+    throw error;
+  }
+};
+
+export const updateProduct = async (id, data, token) => {
+
+  try {
+    const token = JSON.parse(localStorage.getItem("user"))?.access_token;
+
+    const response = await axios.put(
+      `${process.env.REACT_APP_API_BACKEND_URL}/product/update-product/${id}`,
+      data,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Lỗi khi cập nhật sản phẩm:", error);
+    throw error;
+  }
+};
+
+export const deleteProduct = async (id) => {
+  const token = JSON.parse(localStorage.getItem("user"))?.access_token;
+
+  try {
+    const response = await axios.delete(
+      `${process.env.REACT_APP_API_BACKEND_URL}/product/delete-product/${id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Lỗi khi xóa sản phẩm:", error);
+    throw error;
+  }
 };
 
 export const getMyOrders = () => {

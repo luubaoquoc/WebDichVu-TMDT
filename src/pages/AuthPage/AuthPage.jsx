@@ -11,7 +11,6 @@ const AuthForm = ({ visible, onClose }) => {
   const [formData, setFormData] = useState({
     user_name: "",
     user_email: "",
-    user_phone: "",
     user_password: "",
     confirm_password: "",
   });
@@ -77,7 +76,6 @@ const AuthForm = ({ visible, onClose }) => {
 
         {isRegister && <StyledInput name="user_name" placeholder="User Name" onChange={handleChange} />}
         <StyledInput name="user_email" placeholder="Email" onChange={handleChange} />
-        {isRegister && <StyledInput name="user_phone" placeholder="Phone" onChange={handleChange} />}
         <StyledInput type="password" name="user_password" placeholder="Password" onChange={handleChange} />
         {isRegister && (
           <StyledInput type="password" name="confirm_password" placeholder="Confirm Password" onChange={handleChange} />

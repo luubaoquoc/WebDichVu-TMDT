@@ -20,6 +20,7 @@ export const CreateButton = styled.button`
   border-radius: 6px;
   cursor: pointer;
   font-weight: bold;
+  font-size: 18px;
 
   &:hover {
     background-color: #27ae60;

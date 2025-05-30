@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 import {
     Container,
     Title,
@@ -11,7 +12,7 @@ import {
     CreateButton,
 } from "./styleManagerUser";
 import AdminLayout from "../AdminLayout/AdminLayout";
-import { getAllUser, registerUser, blockUser } from "../../../services/api";
+import { getAllUser, registerUser, blockUser, unBlockUser } from "../../../services/api";
 import CreateUserModal from "../../../components/Modals/Users/CreateUserModal/CreateUserModal";
 import EditUserModal from "../../../components/Modals/Users/EditUserModal/EditUserModal";
 
@@ -51,18 +52,19 @@ const UserManagement = () => {
 
     const handleCreateSuccess = async (userData) => {
         try {
-            console.log("User data gửi lên:", userData);
-            const res = await registerUser(userData); // Gọi API tạo user
-            console.log("Kết quả trả về:", res.data);
+            const res = await registerUser(userData);
             if (res.data.status === "success") {
-                fetchUsers(); // Reload danh sách user
-                closeCreateModal();
+                fetchUsers();
+                Swal.fire("Thành công!", "Đăng ký thành công!", "success");
+                return { success: true };
             } else {
-                alert("Tạo user thất bại: " + res.data.message);
+                return { success: false, message: res.data.message || "Tạo user thất bại!" };
             }
         } catch (err) {
-            alert("Lỗi khi tạo user!");
-            console.error(err);
+            console.error("Lỗi API:", err);
+            const message =
+                err.response?.data?.message || "Đã có lỗi xảy ra khi tạo user!";
+            return { success: false, message };
         }
     };
 
@@ -83,20 +85,26 @@ const UserManagement = () => {
         });
     };
 
-    const handleBlockUser = async (userId, currentStatus) => {
+    const handleBlockUser = async (userId, isCurrentlyBlocked) => {
         try {
-            const res = await blockUser(userId, !currentStatus);
-            if (res.data.status === "success") {
-                fetchUsers();
+            let res;
+
+            if (isCurrentlyBlocked) {
+                res = await unBlockUser(userId); // Gọi API mở khóa
             } else {
-                alert("Block user thất bại: " + res.data.message);
+                res = await blockUser(userId, true); // Gọi API khóa
+            }
+
+            if (res.data.status === "success") {
+                fetchUsers(); // Cập nhật danh sách sau khi khóa/mở
+            } else {
+                alert("Thao tác thất bại: " + res.data.message);
             }
         } catch (err) {
-            alert("Lỗi khi block user!");
+            alert("Lỗi khi xử lý khóa/mở user!");
             console.error(err);
         }
     };
-
     return (
         <AdminLayout>
             <Container>

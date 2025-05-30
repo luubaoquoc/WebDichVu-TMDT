@@ -1,6 +1,6 @@
 // src/pages/AdminPage/AdminProducts/AdminProducts.jsx
 import React, { useEffect, useState } from "react";
-import { getProducts, createProduct } from "../../../services/api";
+import { getProducts, createProduct, deleteProduct } from "../../../services/api";
 import AdminLayout from "../AdminLayout/AdminLayout";
 import {
     Container,
@@ -14,22 +14,27 @@ import {
     ActionButton
 } from "./styleAdminProducts";
 import CreateProductModal from "../../../components/Modals/Products/CreateProduct/CreateProduct";
+import EditProductModal from "../../../components/Modals/Products/CreateProduct/EditProduct";
+import ConfirmDeleteModal from "../../../components/Modals/Products/CreateProduct/deleteProduct";
 
 const AdminProducts = () => {
     const [products, setProducts] = useState([]);
     const [showCreateModal, setShowCreateModal] = useState(false);
+    const [showEditModal, setShowEditModal] = useState(false);
+    const [selectedProductId, setSelectedProductId] = useState(null);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [productIdToDelete, setProductIdToDelete] = useState(null);
 
+    const fetchProducts = async () => {
+        try {
+            const res = await getProducts(50, 0); // lấy 50 sản phẩm
+            setProducts(res.data.data || []);
+            console.log("Danh sách sản phẩm:", res.data.data);
+        } catch (error) {
+            console.error("Lỗi khi lấy danh sách sản phẩm:", error);
+        }
+    };
     useEffect(() => {
-        const fetchProducts = async () => {
-            try {
-                const res = await getProducts(50, 0); // lấy 50 sản phẩm
-                setProducts(res.data.data || []);
-                console.log("Danh sách sản phẩm:", res.data.data);
-            } catch (error) {
-                console.error("Lỗi khi lấy danh sách sản phẩm:", error);
-            }
-        };
-
         fetchProducts();
     }, []);
 
@@ -50,7 +55,29 @@ const AdminProducts = () => {
             console.error("Lỗi khi tạo sản phẩm:", err);
         }
     };
+    const handleEditProduct = (productId) => {
+        setSelectedProductId(productId);
+        setShowEditModal(true);
+    };
 
+    const confirmDeleteProduct = (productId) => {
+        setProductIdToDelete(productId);
+        setShowDeleteModal(true);
+    };
+
+    const handleDeleteConfirmed = async () => {
+        try {
+            const res = await deleteProduct(productIdToDelete);
+            if (res.data.status === "success") {
+                setProducts((prev) => prev.filter((p) => p._id !== productIdToDelete));
+            }
+        } catch (err) {
+            console.error("Lỗi khi xóa sản phẩm:", err);
+        } finally {
+            setShowDeleteModal(false);
+            setProductIdToDelete(null);
+        }
+    };
     return (
         <AdminLayout>
             <Container>
@@ -88,8 +115,8 @@ const AdminProducts = () => {
                                     />
                                 </Td>
                                 <Td>
-                                    <ActionButton>Edit</ActionButton>
-                                    <ActionButton danger>Delete</ActionButton>
+                                    <ActionButton onClick={() => handleEditProduct(product._id)}>Edit</ActionButton>
+                                    <ActionButton danger onClick={() => confirmDeleteProduct(product._id)}>Delete</ActionButton>
                                 </Td>
                             </Tr>
                         ))}
@@ -99,6 +126,19 @@ const AdminProducts = () => {
                     <CreateProductModal
                         onClose={() => setShowCreateModal(false)}
                         onSubmit={handleCreateProduct}
+                    />
+                )}
+                {showEditModal && (
+                    <EditProductModal
+                        onClose={() => setShowEditModal(false)}
+                        productId={selectedProductId}
+                        onUpdate={fetchProducts}
+                    />
+                )}
+                {showDeleteModal && (
+                    <ConfirmDeleteModal
+                        onClose={() => setShowDeleteModal(false)}
+                        onConfirm={handleDeleteConfirmed}
                     />
                 )}
             </Container>

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Swal from "sweetalert2";
 import {
     ModalBackground,
     ModalContent,
@@ -9,7 +10,9 @@ import {
     Label,
     Input,
     Button,
+    ErrorMessage,
 } from "./styleCreateUser";
+import { validateRegister } from "../../../../utils/validateRegister";
 
 const CreateUserModal = ({ isOpen, onClose, onSubmit }) => {
     const [formData, setFormData] = useState({
@@ -22,16 +25,37 @@ const CreateUserModal = ({ isOpen, onClose, onSubmit }) => {
         isAdmin: false,
     });
 
+    const [errors, setErrors] = useState({});
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
         setFormData((prev) => ({
             ...prev,
             [name]: type === "checkbox" ? checked : value,
         }));
+        setErrors((prev) => ({
+            ...prev,
+            [name]: "",
+        }));
     };
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        onSubmit(formData);
+        const validation = validateRegister(formData);
+        if (!validation.valid) {
+            setErrors(validation.errors);
+            return;
+        }
+        const result = await onSubmit(formData);
+        if (!result.success) {
+            if (result.message.includes("tồn tại")) {
+                setErrors((prev) => ({
+                    ...prev,
+                    user_email: result.message, // hoặc user_name nếu backend kiểm tra tên
+                }));
+            } else {
+                Swal.fire("Lỗi", result.message, "error");
+            }
+            return;
+        }
         setFormData({
             user_name: "",
             user_email: "",
@@ -58,6 +82,7 @@ const CreateUserModal = ({ isOpen, onClose, onSubmit }) => {
                             onChange={handleChange}
                             required
                         />
+                        {errors.user_name && <ErrorMessage>{errors.user_name}</ErrorMessage>}
                     </FormGroup>
                     <FormGroup>
                         <Label>Email</Label>
@@ -68,17 +93,9 @@ const CreateUserModal = ({ isOpen, onClose, onSubmit }) => {
                             onChange={handleChange}
                             required
                         />
+                        {errors.user_email && <ErrorMessage>{errors.user_email}</ErrorMessage>}
                     </FormGroup>
-                    <FormGroup>
-                        <Label>Phone</Label>
-                        <Input
-                            type="text"
-                            name="user_phone"
-                            value={formData.user_phone}
-                            onChange={handleChange}
-                            required
-                        />
-                    </FormGroup>
+
                     <FormGroup>
                         <Label>Password</Label>
                         <Input
@@ -88,6 +105,7 @@ const CreateUserModal = ({ isOpen, onClose, onSubmit }) => {
                             onChange={handleChange}
                             required
                         />
+                        {errors.user_password && <ErrorMessage>{errors.user_password}</ErrorMessage>}
                     </FormGroup>
                     <FormGroup>
                         <Label>Confirm Password</Label>
@@ -98,6 +116,7 @@ const CreateUserModal = ({ isOpen, onClose, onSubmit }) => {
                             onChange={handleChange}
                             required
                         />
+                        {errors.confirm_password && <ErrorMessage>{errors.confirm_password}</ErrorMessage>}
                     </FormGroup>
 
                     <Button type="submit">Create</Button>

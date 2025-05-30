@@ -22,6 +22,7 @@ export const CreateButton = styled.button`
   border-radius: 6px;
   cursor: pointer;
   font-weight: bold;
+  font-size: 18px;
 
   &:hover {
     background-color: #27ae60;
@@ -29,7 +30,7 @@ export const CreateButton = styled.button`
 `;
 
 export const Title = styled.h2`
-  font-size: 24px;
+  font-size: 28px;
   margin-bottom: 20px;
   color: #4e73df;
 `;

@@ -58,13 +58,15 @@ export const TopbarContainer = styled.div`
   left: 250px;
   right: 0;
   z-index: 1000;
+  font-size: 24px;
 `;
 
 export const TopbarSearch = styled.input`
   border: 1px solid #ddd;
   border-radius: 5px;
   padding: 6px 10px;
-  width: 200px;
+  width: 300px;
+  font-size: 16px;
 `;
 
 export const UserSection = styled.div`

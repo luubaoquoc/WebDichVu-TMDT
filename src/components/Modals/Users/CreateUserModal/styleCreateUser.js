@@ -18,6 +18,7 @@ export const ModalContent = styled.div`
   border-radius: 12px;
   width: 400px;
   position: relative;
+  font-size: 24px;
 `;
 
 export const CloseButton = styled.button`
@@ -32,7 +33,8 @@ export const CloseButton = styled.button`
 
 export const Title = styled.h3`
   margin-top: 0;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
+  color: #4e73df;
 `;
 
 export const Form = styled.form``;
@@ -44,7 +46,6 @@ export const FormGroup = styled.div`
 export const Label = styled.label`
   display: block;
   margin-bottom: 6px;
-  font-weight: bold;
 `;
 
 export const Input = styled.input`
@@ -64,8 +65,15 @@ export const Button = styled.button`
   cursor: pointer;
   width: 100%;
   margin-top: 10px;
+  font-size: 18px;
 
   &:hover {
     background-color: #27ae60;
   }
+`;
+
+export const ErrorMessage = styled.div`
+    color: red;
+    font-size: 0.875rem;
+    margin-top: 4px;
 `;
