@@ -24,14 +24,26 @@ const CreateProductModal = ({ onClose, onSubmit }) => {
         product_description: "",
     });
 
+    const [previewImage, setPreviewImage] = useState(null);
+
     const handleChange = (e) => {
         const { name, value, files } = e.target;
 
         if (name === "product_image") {
+            const file = files[0];
             setFormData((prev) => ({
                 ...prev,
-                product_image: files[0], // chỉ lấy 1 file
+                product_image: file,
             }));
+
+            // 👇 tạo URL preview
+            if (file) {
+                const reader = new FileReader();
+                reader.onloadend = () => {
+                    setPreviewImage(reader.result);
+                };
+                reader.readAsDataURL(file);
+            }
         } else {
             setFormData((prev) => ({
                 ...prev,
@@ -115,6 +127,19 @@ const CreateProductModal = ({ onClose, onSubmit }) => {
                     </FormGroup>
                     <FormGroup>
                         <Label>Image</Label>
+                        {previewImage && (
+                            <img
+                                src={previewImage}
+                                alt="Preview"
+                                style={{
+                                    width: "100px",
+                                    height: "auto",
+                                    marginBottom: "10px",
+                                    borderRadius: "6px",
+                                    objectFit: "cover",
+                                }}
+                            />
+                        )}
                         <Input
                             type="file"
                             name="product_image"

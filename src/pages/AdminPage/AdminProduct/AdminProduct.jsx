@@ -109,7 +109,7 @@ const AdminProducts = () => {
                                 <Td>{product.product_countInStock}</Td>
                                 <Td>
                                     <img
-                                        src={product.product_image}
+                                        src={`http://localhost:3001${product.product_image}`}
                                         alt={product.product_name}
                                         style={{ width: "50px", height: "50px" }}
                                     />

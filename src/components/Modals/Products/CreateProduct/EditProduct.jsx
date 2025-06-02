@@ -20,24 +20,27 @@ const EditProductModal = ({ onClose, productId, onUpdate }) => {
         product_category: "",
         product_price: "",
         product_countInStock: "",
-        product_image: "",
+        product_image: "", // đây sẽ lưu ảnh File nếu có chọn mới
         product_description: "",
     });
+
+    const [previewImage, setPreviewImage] = useState(""); // để hiển thị ảnh preview
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const data = await getProductDetails(productId);
-                console.log("Product data:", data);
+                const product = data.data.data;
                 setFormData({
-                    product_name: data.data.data.product_name || "",
-                    product_brand: data.data.data.product_brand || "",
-                    product_category: data.data.data.product_category || "",
-                    product_price: data.data.data.product_price || "",
-                    product_countInStock: data.data.data.product_countInStock || "",
-                    product_image: data.data.data.product_image || "",
-                    product_description: data.data.data.product_description || "",
+                    product_name: product.product_name || "",
+                    product_brand: product.product_brand || "",
+                    product_category: product.product_category || "",
+                    product_price: product.product_price || "",
+                    product_countInStock: product.product_countInStock || "",
+                    product_image: "", // reset khi edit, ảnh cũ chỉ để preview
+                    product_description: product.product_description || "",
                 });
+                setPreviewImage(product.product_image || "");
             } catch (error) {
                 Swal.fire("Lỗi", "Không thể tải dữ liệu sản phẩm.", "error");
             }
@@ -51,12 +54,35 @@ const EditProductModal = ({ onClose, productId, onUpdate }) => {
         setFormData((prev) => ({ ...prev, [name]: value }));
     };
 
+    const handleImageChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            setFormData((prev) => ({ ...prev, product_image: file }));
+
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setPreviewImage(reader.result); // base64 preview
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         try {
+            const data = new FormData();
+            data.append("product_name", formData.product_name);
+            data.append("product_brand", formData.product_brand);
+            data.append("product_category", formData.product_category);
+            data.append("product_price", formData.product_price);
+            data.append("product_countInStock", formData.product_countInStock);
+            data.append("product_description", formData.product_description);
 
-            const result = await updateProduct(productId, formData);
+            if (formData.product_image) {
+                data.append("product_image", formData.product_image); // ảnh mới nếu có
+            }
+
+            const result = await updateProduct(productId, data);
 
             if (result.status === "success") {
                 Swal.fire("Thành công!", "Cập nhật sản phẩm thành công!", "success");
@@ -76,7 +102,6 @@ const EditProductModal = ({ onClose, productId, onUpdate }) => {
                 <CloseButton onClick={onClose}>×</CloseButton>
                 <Title>Edit product</Title>
                 <Form onSubmit={handleSubmit}>
-                    {/* Các input như cũ */}
                     <FormGroup>
                         <Label>Product Name</Label>
                         <Input
@@ -87,6 +112,7 @@ const EditProductModal = ({ onClose, productId, onUpdate }) => {
                             required
                         />
                     </FormGroup>
+
                     <FormGroup>
                         <Label>Brand</Label>
                         <Input
@@ -97,6 +123,7 @@ const EditProductModal = ({ onClose, productId, onUpdate }) => {
                             required
                         />
                     </FormGroup>
+
                     <FormGroup>
                         <Label>Category</Label>
                         <Input
@@ -107,6 +134,7 @@ const EditProductModal = ({ onClose, productId, onUpdate }) => {
                             required
                         />
                     </FormGroup>
+
                     <FormGroup>
                         <Label>Price</Label>
                         <Input
@@ -117,6 +145,7 @@ const EditProductModal = ({ onClose, productId, onUpdate }) => {
                             required
                         />
                     </FormGroup>
+
                     <FormGroup>
                         <Label>Stock Quantity</Label>
                         <Input
@@ -127,16 +156,30 @@ const EditProductModal = ({ onClose, productId, onUpdate }) => {
                             required
                         />
                     </FormGroup>
+
                     <FormGroup>
                         <Label>Image</Label>
+                        {previewImage && (
+                            <div style={{ marginBottom: "10px" }}>
+                                <img
+                                    src={
+                                        previewImage.startsWith("data:")
+                                            ? previewImage
+                                            : `http://localhost:3001${previewImage}`
+                                    }
+                                    alt="preview"
+                                    style={{ width: "100px", borderRadius: "6px" }}
+                                />
+                            </div>
+                        )}
                         <Input
-                            type="text"
+                            type="file"
                             name="product_image"
-                            value={formData.product_image}
-                            onChange={handleChange}
-                            required
+                            accept="image/*"
+                            onChange={handleImageChange}
                         />
                     </FormGroup>
+
                     <FormGroup>
                         <Label>Description</Label>
                         <Input
@@ -147,7 +190,7 @@ const EditProductModal = ({ onClose, productId, onUpdate }) => {
                             required
                         />
                     </FormGroup>
-                    {/* Các form group khác giống như CreateProductModal */}
+
                     <Button type="submit">Update</Button>
                 </Form>
             </ModalContent>

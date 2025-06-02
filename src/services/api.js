@@ -144,6 +144,7 @@ export const createProduct = async (productData) => {
     productData,
     {
       headers: {
+        'Content-Type': 'multipart/form-data',
         Authorization: `Bearer ${token}`,
       },
     }
@@ -171,6 +172,7 @@ export const updateProduct = async (id, data, token) => {
       data,
       {
         headers: {
+          "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`
         },
       }
