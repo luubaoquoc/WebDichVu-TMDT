@@ -55,23 +55,32 @@ export const FormWrapper = styled.div`
 
 export const TimeSlotGrid = styled.div`
   display: grid;
-  gap: 5px;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 10px;
   margin-top: 10px;
 `;
 
-export const TimeSlot = styled.div`
+export const TimeSlot = styled.div.attrs(props => ({
+  disabled: props.disabled
+}))`
   padding: 12px 0;
   text-align: center;
-  background-color: ${({ selected }) => (selected ? "#2283c5" : "#a3b1bd")};
-  color: ${({ selected }) => (selected ? "#fff" : "#000")};
-  border: ${({ selected }) => (selected ? "2px solid #1c7ed6" : "1px solid #999")};
+  background-color: ${({ selected, disabled }) =>
+    disabled ? "#eee" : selected ? "#2283c5" : "#a3b1bd"};
+  color: ${({ selected, disabled }) =>
+    disabled ? "#999" : selected ? "#fff" : "#000"};
+  border: ${({ selected, disabled }) =>
+    disabled ? "1px solid #ccc" : selected ? "2px solid #1c7ed6" : "1px solid #999"};
   border-radius: 4px;
-  cursor: pointer;
+  cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
   font-size: 16px;
   font-weight: ${({ selected }) => (selected ? "bold" : "normal")};
   transition: background-color 0.3s, border 0.3s;
 
   &:hover {
-    background-color: ${({ selected }) => (selected ? "#4dabf7" : "#91a3b0")};
+    background-color: ${({ selected, disabled }) =>
+    disabled ? "#eee" : selected ? "#4dabf7" : "#91a3b0"};
   }
+
+  pointer-events: ${({ disabled }) => (disabled ? "none" : "auto")};
 `;

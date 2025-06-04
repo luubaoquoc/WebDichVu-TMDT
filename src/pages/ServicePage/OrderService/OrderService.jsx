@@ -1,56 +1,91 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Form, Input, Select, DatePicker, Checkbox, Button, Breadcrumb } from "antd";
 import Sidebar from "../../../components/Sidebar/Sidebar";
 import { Container, FormWrapper, TimeSlot, TimeSlotGrid, Title } from "./styleOrderService";
 import timesservices from "./TimesService";
 import Swal from "sweetalert2";
-import { createService } from "../../../services/api";
+import { createService, getOrderServiceTimeSlots } from "../../../services/api";
+import moment from "moment";
+
 const { Option } = Select;
-
-
 
 const OrderService = () => {
   const [selectedService, setSelectedService] = useState(null);
   const [availableTimeSlots, setAvailableTimeSlots] = useState([]);
-  const [loading, setLoading] = useState(false); // State để hiển thị loading khi gửi API
   const [selectedTimeSlot, setSelectedTimeSlot] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [bookedTimeSlots, setBookedTimeSlots] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [form] = Form.useForm();
 
+  // Lấy danh sách slot đã đặt từ API
+  useEffect(() => {
+    const fetchBookedSlots = async () => {
+      if (!selectedService || !selectedDate) {
+        setBookedTimeSlots([]);
+        return;
+      }
+      try {
+        const data = await getOrderServiceTimeSlots(selectedDate, selectedService);
+        setBookedTimeSlots(data || []);
+      } catch {
+        setBookedTimeSlots([]);
+      }
+    };
+    fetchBookedSlots();
+  }, [selectedService, selectedDate]);
 
+  // Xử lý thay đổi dịch vụ
   const handleServiceChange = (value) => {
     setSelectedService(value);
-    if (timesservices.diennuoc.services[value]) {
-      setAvailableTimeSlots(timesservices.diennuoc.services[value].timeSlots || []);
-    } else if (timesservices.hutbephot.services[value]) {
-      setAvailableTimeSlots(timesservices.hutbephot.services[value].timeSlots || []);
-    } else {
-      setAvailableTimeSlots([]);
-    }
+    setSelectedTimeSlot(null);
+    form.setFieldsValue({ timeSlot: null });
+
+    const service =
+      timesservices.diennuoc.services[value] ||
+      timesservices.hutbephot.services[value];
+
+    setAvailableTimeSlots(service?.timeSlots || []);
   };
 
+  const handleDateChange = (date, dateString) => {
+    setSelectedDate(dateString);
+    setSelectedTimeSlot(null);
+    form.setFieldsValue({ timeSlot: null });
+  };
 
   const onFinish = async (values) => {
-    setLoading(true); // Bật loading khi gửi API
+    setLoading(true);
     try {
-      const response = await createService({
+      await createService({
         ...values,
-        date: values.date.format("YYYY-MM-DD"), // Chuyển ngày thành string
+        date: values.date.format("YYYY-MM-DD"),
       });
-
       Swal.fire("Thành công!", "Đặt lịch thành công!", "success");
-      console.log("Response:", response.data);
-
       form.resetFields();
       setSelectedService(null);
       setAvailableTimeSlots([]);
       setSelectedTimeSlot(null);
+      setSelectedDate(null);
+      setBookedTimeSlots([]);
     } catch (error) {
       Swal.fire("Lỗi!", "Đặt lịch thất bại!", "error");
-      console.error("Error:", error);
     } finally {
-      setLoading(false); // Tắt loading
+      setLoading(false);
     }
   };
+
+  // Tạo danh sách Option dịch vụ
+  const renderServiceOptions = () => {
+    const diennuoc = Object.entries(timesservices.diennuoc.services).map(([key, val]) => (
+      <Option key={key} value={key}>{val.name}</Option>
+    ));
+    const hutbephot = Object.entries(timesservices.hutbephot.services).map(([key, val]) => (
+      <Option key={key} value={key}>{val.name}</Option>
+    ));
+    return [...diennuoc, ...hutbephot];
+  };
+
   return (
     <Container>
       <Breadcrumb>Trang chủ / Dịch vụ / Đặt lịch dịch vụ</Breadcrumb>
@@ -61,51 +96,54 @@ const OrderService = () => {
           <Form.Item label="Họ và tên" name="name" rules={[{ required: true, message: "Vui lòng nhập họ và tên!" }]}>
             <Input placeholder="Họ tên của bạn" />
           </Form.Item>
-
           <Form.Item label="Số điện thoại" name="phone" rules={[{ required: true, message: "Vui lòng nhập số điện thoại!" }]}>
             <Input placeholder="Số điện thoại của bạn" />
           </Form.Item>
-
           <Form.Item label="Dịch vụ" name="service" rules={[{ required: true, message: "Vui lòng chọn dịch vụ!" }]}>
             <Select placeholder="Chọn dịch vụ" onChange={handleServiceChange}>
-              {Object.keys(timesservices.diennuoc.services).map((key) => (
-                <Option key={key} value={key}>{timesservices.diennuoc.services[key].name}</Option>
-              ))}
-              {Object.keys(timesservices.hutbephot.services).map((key) => (
-                <Option key={key} value={key}>{timesservices.hutbephot.services[key].name}</Option>
-              ))}
+              {renderServiceOptions()}
             </Select>
           </Form.Item>
+          <Form.Item
+            label="Thời gian"
+            name="date"
+            rules={[{ required: true, message: "Vui lòng chọn ngày!" }]}
+          >
+            <DatePicker
+              style={{ width: "100%" }}
+              onChange={handleDateChange}
+              disabledDate={(current) => current && current < moment().startOf("day")}
+            />
+          </Form.Item>
 
-          {/* Hiển thị khung giờ dựa trên dịch vụ được chọn */}
-          <TimeSlotGrid>
-            {availableTimeSlots.length > 0 && (
-              <Form.Item
-                label="Chọn khung giờ"
-                name="timeSlot"
-                rules={[{ required: true, message: "Vui lòng chọn khung giờ!" }]}
-              >
-                <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: "5px" }}>
-                  {availableTimeSlots.map((slot, index) => (
+          {availableTimeSlots.length > 0 && (
+            <Form.Item
+              label="Chọn khung giờ"
+              name="timeSlot"
+              rules={[{ required: true, message: "Vui lòng chọn khung giờ!" }]}
+            >
+              <TimeSlotGrid>
+                {availableTimeSlots.map((slot, idx) => {
+                  const isBooked = bookedTimeSlots.includes(slot);
+                  return (
                     <TimeSlot
-                      key={index}
-                      selected={selectedTimeSlot === slot} // ✅ truyền prop selected
+                      key={idx}
+                      selected={selectedTimeSlot === slot}
+                      disabled={isBooked}
                       onClick={() => {
-                        setSelectedTimeSlot(slot);
-                        form.setFieldsValue({ timeSlot: slot }); // cập nhật form
+                        if (!isBooked) {
+                          setSelectedTimeSlot(slot);
+                          form.setFieldsValue({ timeSlot: slot });
+                        }
                       }}
                     >
                       {slot}
                     </TimeSlot>
-                  ))}
-                </div>
-              </Form.Item>
-            )}
-          </TimeSlotGrid>
-
-          <Form.Item label="Thời gian" name="date" rules={[{ required: true, message: "Vui lòng chọn ngày!" }]}>
-            <DatePicker style={{ width: "100%" }} />
-          </Form.Item>
+                  );
+                })}
+              </TimeSlotGrid>
+            </Form.Item>
+          )}
 
           <Form.Item label="Địa chỉ" name="address" rules={[{ required: true, message: "Vui lòng nhập địa chỉ!" }]}>
             <Input placeholder="Địa chỉ của bạn" />
@@ -115,12 +153,16 @@ const OrderService = () => {
             <Input.TextArea placeholder="Nhập ghi chú (nếu có)" rows={4} />
           </Form.Item>
 
-          <Form.Item name="confirm" valuePropName="checked" rules={[{ required: true, message: "Vui lòng xác nhận thông tin!" }]}>
-            <Checkbox>Xác nhận thông tin</Checkbox>
+          <Form.Item
+            name="confirm"
+            valuePropName="checked"
+            rules={[{ validator: (_, value) => value ? Promise.resolve() : Promise.reject("Vui lòng xác nhận thông tin!") }]}
+          >
+            <Checkbox>Tôi xác nhận thông tin đã nhập là chính xác</Checkbox>
           </Form.Item>
 
-          <Form.Item style={{ display: "flex", justifyContent: "center" }}>
-            <Button type="primary" htmlType="submit">Đặt lịch</Button>
+          <Form.Item style={{ textAlign: "center" }}>
+            <Button type="primary" htmlType="submit" loading={loading}>Đặt lịch</Button>
           </Form.Item>
         </Form>
       </FormWrapper>

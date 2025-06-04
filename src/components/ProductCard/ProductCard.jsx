@@ -5,7 +5,7 @@ const ProductCard = ({ product }) => {
     return (
         <Card>
             <DiscountBadge>-{product.product_discount}%</DiscountBadge>
-            <Image src={product.product_image} alt={product.name} />
+            <Image src={`http://localhost:3001${product.product_image}`} alt={product.name} />
             <Brand>{product.product_brand}</Brand>
             <ProductName>{product.product_name}</ProductName>
             <Price>{product.product_price.toLocaleString()}₫</Price>

@@ -212,3 +212,23 @@ export const getMyOrders = () => {
     }
   });
 };
+
+
+export const getOrderServiceTimeSlots = async (date, service) => {
+  const token = JSON.parse(localStorage.getItem("user"))?.access_token;
+
+  try {
+    const response = await axios.get(
+      `${process.env.REACT_APP_API_BACKEND_URL}/service/orderservice/booked-timesslots?date=${date}&service=${service}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return response.data.bookedTimeSlots || [];
+  } catch (error) {
+    console.error("Lỗi khi lấy khung giờ đã đặt:", error);
+    throw error;
+  }
+}
