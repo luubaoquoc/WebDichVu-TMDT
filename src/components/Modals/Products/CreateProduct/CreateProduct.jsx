@@ -19,6 +19,7 @@ const CreateProductModal = ({ onClose, onSubmit }) => {
     product_category: "",
     product_price: "",
     product_countInStock: "",
+    product_discount: 0,
     product_image: null,
     product_description: "",
   });
@@ -120,6 +121,16 @@ const CreateProductModal = ({ onClose, onSubmit }) => {
               type="number"
               name="product_countInStock"
               value={formData.product_countInStock}
+              onChange={handleChange}
+              required
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label>Discount</Label>
+            <Input
+              type="number"
+              name="product_discount"
+              value={formData.product_discount}
               onChange={handleChange}
               required
             />

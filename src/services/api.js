@@ -26,10 +26,10 @@ export const getUserDetails = (id) => {
     `${process.env.REACT_APP_API_BACKEND_URL}/user/get-details/${id}`,
     token
       ? {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
       : undefined
   );
 };
@@ -211,6 +211,18 @@ export const deleteProduct = async (id) => {
 };
 
 export const getMyOrders = () => {
+  const token = JSON.parse(localStorage.getItem("user"))?.access_token;
+  return axios.get(
+    `${process.env.REACT_APP_API_BACKEND_URL}/order/my-orders`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+};
+
+export const getMyOrderService = () => {
   const token = JSON.parse(localStorage.getItem("user"))?.access_token;
 
   return axios.get(

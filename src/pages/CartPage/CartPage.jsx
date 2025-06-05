@@ -47,9 +47,11 @@ function CartPage() {
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
+    console.log("Stored user:", storedUser); // Kiểm tra giá trị của storedUser
     if (storedUser) {
       try {
         const parsedUser = JSON.parse(storedUser);
+        console.log("Parsed user:", parsedUser); // Kiểm tra giá trị của parsedUser
         setUser(parsedUser.data);
       } catch (error) {
         console.error("Lỗi khi parse JSON từ localStorage:", error);

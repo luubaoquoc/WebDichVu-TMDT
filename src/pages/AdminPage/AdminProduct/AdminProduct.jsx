@@ -95,6 +95,7 @@ const AdminProducts = () => {
                             <Th>Category</Th>
                             <Th>Price</Th>
                             <Th>Stock</Th>
+                            <Th>Discount</Th>
                             <Th>Image</Th>
                             <Th>Actions</Th>
                         </Tr>
@@ -107,6 +108,7 @@ const AdminProducts = () => {
                                 <Td>{product.product_category}</Td>
                                 <Td>{product.product_price}</Td>
                                 <Td>{product.product_countInStock}</Td>
+                                <Td>{product.product_discount}%</Td>
                                 <Td>
                                     <img
                                         src={`http://localhost:3001${product.product_image}`}

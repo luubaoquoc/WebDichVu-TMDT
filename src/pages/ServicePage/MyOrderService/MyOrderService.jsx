@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getMyOrders } from "../../../services/api";
+import { getMyOrderService } from "../../../services/api";
 import { Container, Title } from "./styleMyOrderService";
 import { Table } from "antd";
 import { Breadcrumb } from "../MyOrderService/styleMyOrderService";
@@ -11,7 +11,7 @@ const OrderServiceClient = () => {
     useEffect(() => {
         const fetchOrders = async () => {
             try {
-                const res = await getMyOrders();
+                const res = await getMyOrderService();
                 if (res.data.status === "success") {
                     setOrders(res.data.data);
                 }

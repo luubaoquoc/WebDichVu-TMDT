@@ -20,6 +20,7 @@ const EditProductModal = ({ onClose, productId, onUpdate }) => {
         product_category: "",
         product_price: "",
         product_countInStock: "",
+        product_discount: 0,
         product_image: "", // đây sẽ lưu ảnh File nếu có chọn mới
         product_description: "",
     });
@@ -37,6 +38,7 @@ const EditProductModal = ({ onClose, productId, onUpdate }) => {
                     product_category: product.product_category || "",
                     product_price: product.product_price || "",
                     product_countInStock: product.product_countInStock || "",
+                    product_discount: product.product_discount || 0,
                     product_image: "", // reset khi edit, ảnh cũ chỉ để preview
                     product_description: product.product_description || "",
                 });
@@ -76,6 +78,7 @@ const EditProductModal = ({ onClose, productId, onUpdate }) => {
             data.append("product_category", formData.product_category);
             data.append("product_price", formData.product_price);
             data.append("product_countInStock", formData.product_countInStock);
+            data.append("product_discount", formData.product_discount);
             data.append("product_description", formData.product_description);
 
             if (formData.product_image) {
@@ -154,6 +157,17 @@ const EditProductModal = ({ onClose, productId, onUpdate }) => {
                             value={formData.product_countInStock}
                             onChange={handleChange}
                             required
+                        />
+                    </FormGroup>
+                    <FormGroup>
+                        <Label>Discount</Label>
+                        <Input
+                            type="number"
+                            name="product_discount"
+                            value={formData.product_discount}
+                            onChange={handleChange}
+                            min="0"
+                            max="100"
                         />
                     </FormGroup>
 

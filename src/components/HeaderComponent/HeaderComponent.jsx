@@ -29,7 +29,8 @@ import {
 import { Avatar, Dropdown } from "antd";
 import Swal from "sweetalert2";
 import AuthForm from "../../pages/AuthPage/AuthPage";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { clearCart, loadCart } from "../../redux/slides/cartSlice";
 
 const HeaderComponent = () => {
   const [showDropdown, setShowDropdown] = useState(false);
@@ -38,6 +39,18 @@ const HeaderComponent = () => {
   const [loading, setLoading] = useState(true);
   const order = useSelector((state) => state.cart);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+
+  useEffect(() => {
+    // Lưu cart theo userId mỗi khi orderItems thay đổi
+    if (user && user.data && user.data._id) {
+      localStorage.setItem(
+        `cart_${user.data._id}`,
+        JSON.stringify(order.orderItems)
+      );
+    }
+  }, [order.orderItems, user]);
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
@@ -45,11 +58,21 @@ const HeaderComponent = () => {
       try {
         const parsedUser = JSON.parse(storedUser);
         setUser(parsedUser);
+
+        // Load cart theo userId
+        const cartData = localStorage.getItem(`cart_${parsedUser.data._id}`);
+        if (cartData) {
+          dispatch(loadCart(JSON.parse(cartData)));
+        } else {
+          dispatch(loadCart([]));
+        }
       } catch (error) {
         console.error("Lỗi khi parse JSON từ localStorage:", error);
       }
+    } else {
+      dispatch(loadCart([])); // Nếu không có user thì clear cart
     }
-    setLoading(false); // Dữ liệu đã tải xong
+    setLoading(false);
   }, []);
   if (loading) {
     return null; // Tránh render khi dữ liệu chưa load xong
@@ -59,6 +82,7 @@ const HeaderComponent = () => {
   const handleLogout = () => {
     localStorage.removeItem("user");
     setUser(null);
+    dispatch(clearCart());
     Swal.fire("Thành công!", "Đăng xuất thành công!", "success").then(() => {
       navigate("/"); // ⚠️ Sau khi logout thì chuyển về trang chủ
     });
@@ -69,10 +93,15 @@ const HeaderComponent = () => {
     { key: "1", label: "Profile", onClick: () => navigate("/profile-user") },
     {
       key: "2",
+      label: "Order",
+      onClick: () => navigate("/order"),
+    },
+    {
+      key: "3",
       label: "OderService",
       onClick: () => navigate("/my-order-service"),
     },
-    { key: "3", label: "Logout", onClick: handleLogout },
+    { key: "4", label: "Logout", onClick: handleLogout },
   ];
   return (
     <HeaderContainer>

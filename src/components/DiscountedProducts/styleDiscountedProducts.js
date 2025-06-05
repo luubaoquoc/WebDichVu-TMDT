@@ -26,8 +26,9 @@ export const ViewMore = styled.span`
 
 export const ProductList = styled.div`
   display: flex;
-  gap: 25px;
+  gap: 5px;
   overflow-x: auto;
+  justify-content: space-between;
 `;
 
 export const ProductCard = styled.div`
