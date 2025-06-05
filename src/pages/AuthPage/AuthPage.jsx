@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Swal from "sweetalert2";
 import { validateRegister } from "../../utils/validateRegister";
 import { Modal, Checkbox } from "antd";
@@ -47,7 +47,6 @@ const AuthForm = ({ visible, onClose }) => {
           localStorage.setItem("user", JSON.stringify(userData));
           Swal.fire("Đăng nhập thành công!", "", "success").then(() => {
             window.location.reload();
-
           });
         } else {
           localStorage.removeItem("user");
@@ -55,14 +54,20 @@ const AuthForm = ({ visible, onClose }) => {
 
           // Kiểm tra message từ backend
           if (message === "User is blocked") {
-            Swal.fire("Tài khoản bị khóa", "Vui lòng liên hệ quản trị viên", "error");
-          } else if (message === "User not found" || message === "Password is incorrect") {
+            Swal.fire(
+              "Tài khoản bị khóa",
+              "Vui lòng liên hệ quản trị viên",
+              "error"
+            );
+          } else if (
+            message === "User not found" ||
+            message === "Password is incorrect"
+          ) {
             Swal.fire("Lỗi", "Email hoặc mật khẩu không đúng!", "error");
           } else {
             Swal.fire("Lỗi", message || "Đăng nhập thất bại", "error");
           }
         }
-
       }
     } catch (error) {
       Swal.fire("Lỗi", "Có lỗi xảy ra, vui lòng thử lại!", "error");
@@ -74,26 +79,60 @@ const AuthForm = ({ visible, onClose }) => {
       <FormWrapper>
         <h1>{isRegister ? "REGISTER" : "LOGIN"}</h1>
 
-        {isRegister && <StyledInput name="user_name" placeholder="User Name" onChange={handleChange} />}
-        <StyledInput name="user_email" placeholder="Email" onChange={handleChange} />
-        <StyledInput type="password" name="user_password" placeholder="Password" onChange={handleChange} />
         {isRegister && (
-          <StyledInput type="password" name="confirm_password" placeholder="Confirm Password" onChange={handleChange} />
+          <StyledInput
+            name="user_name"
+            placeholder="User Name"
+            onChange={handleChange}
+          />
+        )}
+        <StyledInput
+          name="user_email"
+          placeholder="Email"
+          onChange={handleChange}
+        />
+        <StyledInput
+          type="password"
+          name="user_password"
+          placeholder="Password"
+          onChange={handleChange}
+        />
+        {isRegister && (
+          <StyledInput
+            type="password"
+            name="confirm_password"
+            placeholder="Confirm Password"
+            onChange={handleChange}
+          />
         )}
 
         {!isRegister && (
-          <div style={{ width: "100%", display: "flex", justifyContent: "space-between" }}>
+          <div
+            style={{
+              width: "100%",
+              display: "flex",
+              justifyContent: "space-between",
+            }}
+          >
             <Checkbox>Remember Password</Checkbox>
             <a href="#forgot-password">Forgot Password?</a>
           </div>
         )}
 
-        <LoginButton onClick={handleSubmit}>{isRegister ? "REGISTER" : "LOGIN"}</LoginButton>
+        <LoginButton onClick={handleSubmit}>
+          {isRegister ? "REGISTER" : "LOGIN"}
+        </LoginButton>
 
         {!isRegister ? (
-          <p>Chưa có tài khoản? <a onClick={() => setIsRegister(true)}>Đăng ký</a></p>
+          <p>
+            Chưa có tài khoản?{" "}
+            <a onClick={() => setIsRegister(true)}>Đăng ký</a>
+          </p>
         ) : (
-          <p>Đã có tài khoản? <a onClick={() => setIsRegister(false)}>Đăng nhập</a></p>
+          <p>
+            Đã có tài khoản?{" "}
+            <a onClick={() => setIsRegister(false)}>Đăng nhập</a>
+          </p>
         )}
 
         <p>or</p>
