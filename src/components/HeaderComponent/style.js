@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { SearchOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 
-
 export const HeaderContainer = styled.div`
   position: fixed; /* Giữ nguyên khi cuộn */
   top: 0;
@@ -34,14 +33,13 @@ export const LogoImage = styled.img`
   width: 70px;
   height: 70px;
   object-fit: contain;
-  
 `;
 
 export const SearchWrapper = styled.div`
-    position: relative;
-    width: 100%;
-    display: flex;
-    align-items: center;
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
 `;
 export const SearchBar = styled(Input)`
   width: 100%;
@@ -56,14 +54,11 @@ export const SearchIcon = styled(SearchOutlined)`
   z-index: 1;
 `;
 
-
-
 export const Hotline = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
   justify-content: center;
-  
 `;
 
 export const HotlineText = styled.div`
@@ -76,16 +71,40 @@ export const HotlineText = styled.div`
 export const AuthCart = styled.div`
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 15px;
   justify-content: center;
   font-size: 24px;
   font-weight: bold;
   cursor: pointer;
 `;
 
+export const Cart = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+`;
+
+export const CartBadge = styled.span`
+  position: absolute;
+  top: -8px;
+  right: -12px;
+  background: #d0021b;
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 50%;
+  padding: 2px 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+`;
+
 export const Username = styled.span`
   font-size: 18px;
-  `
+`;
 
 export const Navbar = styled.div`
   background-color: #003366;
@@ -124,8 +143,8 @@ export const NavItem = styled.a`
 export const DropdownMenu = styled.div`
   position: absolute;
   top: 50px;
-  left: 50%; 
-  transform: translateX(-40%); 
+  left: 50%;
+  transform: translateX(-40%);
   background: white;
   border: 1px solid #ddd;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
@@ -133,7 +152,7 @@ export const DropdownMenu = styled.div`
   gap: 20px;
   padding: 15px;
   display: ${(props) => (props.show ? "flex" : "none")};
-   width: 850px;
+  width: 850px;
   min-width: 600px; /* Giúp menu không bị nhỏ */
   color: black; /* Đảm bảo chữ không bị trắng */
 `;
@@ -153,7 +172,7 @@ export const DropdownTitle = styled.div`
   font-weight: bold;
   margin-bottom: 10px;
   text-decoration: underline;
-  color: #1A427F;
+  color: #1a427f;
 `;
 
 export const DropdownItem = styled(Link)`
@@ -162,7 +181,7 @@ export const DropdownItem = styled(Link)`
   padding: 5px 0 5px 10px;
   cursor: pointer;
   font-weight: normal;
-display: flex;
+  display: flex;
   &:hover {
     text-decoration: underline;
   }

@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Form, Input, Select, DatePicker, Checkbox, Button, Breadcrumb } from "antd";
 import Sidebar from "../../../components/Sidebar/Sidebar";
-import { Container, FormWrapper, TimeSlot, TimeSlotGrid, Title } from "./styleOrderService";
+import {
+  Container,
+  FormWrapper,
+  TimeSlot,
+  TimeSlotGrid,
+  Title,
+} from "./styleOrderService";
 import timesservices from "./TimesService";
 import Swal from "sweetalert2";
 import { createService, getOrderServiceTimeSlots } from "../../../services/api";
@@ -93,7 +99,11 @@ const OrderService = () => {
       <FormWrapper>
         <h2>Đặt lịch dịch vụ</h2>
         <Form layout="vertical" form={form} onFinish={onFinish}>
-          <Form.Item label="Họ và tên" name="name" rules={[{ required: true, message: "Vui lòng nhập họ và tên!" }]}>
+          <Form.Item
+            label="Họ và tên"
+            name="name"
+            rules={[{ required: true, message: "Vui lòng nhập họ và tên!" }]}
+          >
             <Input placeholder="Họ tên của bạn" />
           </Form.Item>
           <Form.Item label="Số điện thoại" name="phone" rules={[{ required: true, message: "Vui lòng nhập số điện thoại!" }]}>
@@ -145,7 +155,11 @@ const OrderService = () => {
             </Form.Item>
           )}
 
-          <Form.Item label="Địa chỉ" name="address" rules={[{ required: true, message: "Vui lòng nhập địa chỉ!" }]}>
+          <Form.Item
+            label="Địa chỉ"
+            name="address"
+            rules={[{ required: true, message: "Vui lòng nhập địa chỉ!" }]}
+          >
             <Input placeholder="Địa chỉ của bạn" />
           </Form.Item>
 
