@@ -101,7 +101,7 @@ const PlasterPaintService = () => {
                         <div >
                             <div style={{ textAlign: 'center' }}>
                                 <img
-                                    src="/assets/images/ky-thuat-vien-1.jpg"
+                                    src="assets/images/ky-thuat-vien-2.jpeg"
                                     alt="Kỹ thuật viên Lê Trung Sơn"
                                     style={{ width: '100px', height: '100px', borderRadius: '50%', objectFit: 'cover' }}
                                 />
