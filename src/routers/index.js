@@ -14,6 +14,7 @@ import AdminDashBoard from "../pages/AdminPage/AdminDashBoard/Admin-DashBoard";
 import AdminLogin from "../pages/AdminPage/AdminLogin/AdminLogin";
 import ManagerUser from "../pages/AdminPage/AdminManagerUser/ManagerUser";
 import AdminProducts from "../pages/AdminPage/AdminProduct/AdminProduct";
+import AdminProductOrder from "../pages/AdminPage/AdminProductOrder/AdminProductOrder";
 import AdminServiceOrder from "../pages/AdminPage/AdminServiceOrderManagement/AdminServiceOrder";
 import PlasterPaintService from "../pages/ServicePage/plasterpaintService/plasterpaintService";
 import RefrigerationRepairService from "../pages/ServicePage/refrigerationrepairService/refrigerationrepairService";
@@ -21,6 +22,8 @@ import WaterAndElectricityInstallationService from "../pages/ServicePage/wateran
 import WaterAndElectricityRepairService from "../pages/ServicePage/waterandelectricityrepairservice/waterandelectricityrepairservice";
 import PipelineProcessingService from "../pages/ServicePage/pipelineprocessingService/pipelineprocessingService";
 import UncloggingDrainService from "../pages/ServicePage/uncloggingdrainService/uncloggingdrainService";
+import CleanAndTidyService from "../pages/ServicePage/waterandelectricityrepairservice/cleanandtidy";
+import WaterproofingFloorCoveringService from "../pages/ServicePage/waterandelectricityrepairservice/waterproofingfloorcovering";
 import CartPage from "../pages/CartPage/CartPage";
 import CheckoutPage from "../pages/CheckoutPage/CheckoutPage";
 
@@ -110,6 +113,19 @@ export const routers = [
     page: UncloggingDrainService,
     isShowHeader: true,
   },
+
+  {
+    path: "/clean-and-tidy-service",
+    page: CleanAndTidyService,
+    isShowHeader: true,
+  },
+
+  {
+    path: "/waterproofing-floor-covering-service",
+    page: WaterproofingFloorCoveringService,
+    isShowHeader: true,
+  },
+
   {
     path: "/profile-user",
     page: ProfilePage,
@@ -139,6 +155,11 @@ export const routers = [
   {
     path: "/admin/manager-service-order",
     page: AdminServiceOrder,
+  },
+
+  {
+    path: "/admin/manager-product-order",
+    page: AdminProductOrder,
   },
   {
     path: "*",
