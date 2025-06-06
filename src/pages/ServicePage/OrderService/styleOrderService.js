@@ -58,6 +58,7 @@ export const TimeSlotGrid = styled.div`
   grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   gap: 10px;
   margin-top: 10px;
+  margin-bottom: 10px;
 `;
 
 export const TimeSlot = styled.div.attrs(props => ({

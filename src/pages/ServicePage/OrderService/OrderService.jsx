@@ -66,6 +66,7 @@ const OrderService = () => {
       await createService({
         ...values,
         date: values.date.format("YYYY-MM-DD"),
+        timeSlot: values.timeSlot, // Gửi khung giờ lên backend
       });
       Swal.fire("Thành công!", "Đặt lịch thành công!", "success");
       form.resetFields();
@@ -126,34 +127,57 @@ const OrderService = () => {
             />
           </Form.Item>
 
-          {availableTimeSlots.length > 0 && (
-            <Form.Item
-              label="Chọn khung giờ"
-              name="timeSlot"
-              rules={[{ required: true, message: "Vui lòng chọn khung giờ!" }]}
-            >
-              <TimeSlotGrid>
-                {availableTimeSlots.map((slot, idx) => {
-                  const isBooked = bookedTimeSlots.includes(slot);
-                  return (
-                    <TimeSlot
-                      key={idx}
-                      selected={selectedTimeSlot === slot}
-                      disabled={isBooked}
-                      onClick={() => {
-                        if (!isBooked) {
-                          setSelectedTimeSlot(slot);
-                          form.setFieldsValue({ timeSlot: slot });
-                        }
-                      }}
-                    >
-                      {slot}
-                    </TimeSlot>
-                  );
-                })}
-              </TimeSlotGrid>
-            </Form.Item>
-          )}
+          {/* Hidden field để lưu timeSlot vào form */}
+          <Form.Item
+            name="timeSlot"
+            rules={[{ required: true, message: "Vui lòng chọn khung giờ!" }]}
+            hidden
+          >
+            <Input />
+          </Form.Item>
+
+          <TimeSlotGrid>
+            {availableTimeSlots.map((slot, idx) => {
+              const isBooked = bookedTimeSlots.includes(slot);
+
+              // Nếu là ngày hôm nay, disable các khung giờ đã qua (so với giờ bắt đầu)
+              let isPast = false;
+              if (selectedDate && moment(selectedDate).isSame(moment(), "day")) {
+                // Lấy giờ bắt đầu của slot, ví dụ "8.30 - 10.00" => "8.30"
+                const startTime = slot.split("-")[0]?.trim();
+                if (startTime) {
+                  const [hour, minute] = startTime.split(".").length === 2
+                    ? startTime.split(".")
+                    : [startTime.split(".")[0], "00"];
+                  const slotStart = moment().set({
+                    hour: parseInt(hour, 10),
+                    minute: parseInt(minute, 10),
+                    second: 0,
+                    millisecond: 0
+                  });
+                  if (moment().isAfter(slotStart)) {
+                    isPast = true;
+                  }
+                }
+              }
+
+              return (
+                <TimeSlot
+                  key={idx}
+                  selected={selectedTimeSlot === slot}
+                  disabled={isBooked || isPast}
+                  onClick={() => {
+                    if (!isBooked && !isPast) {
+                      setSelectedTimeSlot(slot);
+                      form.setFieldsValue({ timeSlot: slot });
+                    }
+                  }}
+                >
+                  {slot}
+                </TimeSlot>
+              );
+            })}
+          </TimeSlotGrid>
 
           <Form.Item
             label="Địa chỉ"
@@ -185,4 +209,4 @@ const OrderService = () => {
   );
 };
 
-export default OrderService;
+export default OrderService;  
