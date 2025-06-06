@@ -1,27 +1,43 @@
 import React, { useEffect, useState } from "react";
-import { getMyOrderService } from "../../../services/api";
+import { getMyOrderService, cancelOrderService } from "../../../services/api";
 import { Container, Title } from "./styleMyOrderService";
-import { Table } from "antd";
+import { Table, Button, message } from "antd";
 import { Breadcrumb } from "../MyOrderService/styleMyOrderService";
 
 const OrderServiceClient = () => {
     const [orders, setOrders] = useState([]);
-
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        const fetchOrders = async () => {
-            try {
-                const res = await getMyOrderService();
-                if (res.data.status === "success") {
-                    setOrders(res.data.data);
-                }
-            } catch (error) {
-                console.error("Lỗi lấy đơn dịch vụ:", error);
-            }
-        };
-
         fetchOrders();
     }, []);
+
+    const fetchOrders = async () => {
+        try {
+            const res = await getMyOrderService();
+            if (res.data.status === "success") {
+                setOrders(res.data.data);
+            }
+        } catch (error) {
+            console.error("Lỗi lấy đơn dịch vụ:", error);
+        }
+    };
+
+    const handleCancel = async (id) => {
+        setLoading(true);
+        try {
+            const res = await cancelOrderService(id);
+            if (res.data.status === "success") {
+                message.success("Đã hủy đơn thành công!");
+                fetchOrders();
+            } else {
+                message.error("Hủy đơn thất bại!");
+            }
+        } catch (error) {
+            message.error("Có lỗi xảy ra khi hủy đơn!");
+        }
+        setLoading(false);
+    };
 
     const columns = [
         {
@@ -59,6 +75,21 @@ const OrderServiceClient = () => {
                 <span style={{ color: confirmed ? "green" : "orange" }}>
                     {confirmed ? "Đã xác nhận" : "Đang chờ"}
                 </span>
+            ),
+        },
+        {
+            title: "Hành động",
+            key: "action",
+            render: (_, record) => (
+                !record.confirmed && (
+                    <Button
+                        danger
+                        loading={loading}
+                        onClick={() => handleCancel(record._id)}
+                    >
+                        Hủy
+                    </Button>
+                )
             ),
         },
     ];

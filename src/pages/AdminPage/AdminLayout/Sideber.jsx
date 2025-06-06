@@ -9,9 +9,8 @@ const Sidebar = () => {
             <SidebarItem as={Link} to="/admin/dashboard">Dashboard</SidebarItem>
             <SidebarItem as={Link} to="/admin/manager-user">Users</SidebarItem>
             <SidebarItem as={Link} to="/admin/products">Products</SidebarItem>
-            <SidebarItem>Services</SidebarItem>
             <SidebarItem as={Link} to="/admin/manager-service-order">Service Orders</SidebarItem>
-            <SidebarItem>Product Orders</SidebarItem>
+            <SidebarItem as={Link} to="/admin/manager-product-order">Product Orders</SidebarItem>
         </SidebarContainer>
     );
 };

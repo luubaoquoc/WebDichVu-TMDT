@@ -136,6 +136,19 @@ export const confirmServiceOrder = (orderId) => {
   );
 };
 
+
+export const cancelOrderService = async (id) => {
+  const token = JSON.parse(localStorage.getItem("user"))?.access_token;
+  return axios.delete(
+    `${process.env.REACT_APP_API_BACKEND_URL}/service/orderservice/cancel/${id}`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+};
+
 export const getProducts = async (limit = 12, page = 0) => {
   const response = await axios.get(
     `${process.env.REACT_APP_API_BACKEND_URL}/product/all-product?limit=${limit}&page=${page}`
@@ -248,6 +261,18 @@ export const createOrder = async (orderData) => {
     }
   );
 };
+
+export const getAllOrders = async () => {
+  const token = JSON.parse(localStorage.getItem("user"))?.access_token;
+  return axios.get(
+    `${process.env.REACT_APP_API_BACKEND_URL}/order/all`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+}
 
 
 export const getOrderServiceTimeSlots = async (date, service) => {

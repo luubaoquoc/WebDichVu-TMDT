@@ -229,11 +229,11 @@ const HeaderComponent = () => {
             </DropdownColumn>
             <DropdownColumn>
               <DropdownTitle>Xây dựng nhà ở</DropdownTitle>
-              <DropdownItem>Dọn dẹp và vệ sinh</DropdownItem>
-              <DropdownItem>Chống thấm & ốp lát</DropdownItem>
-              <DropdownItem>Xử lý sự cố</DropdownItem>
-              <DropdownItem>Cơi nới & sửa chữa</DropdownItem>
-              <DropdownItem>Tư vấn & thiết kế</DropdownItem>
+              <DropdownItem as={Link} to="/clean-and-tidy-service">Dọn dẹp và vệ sinh</DropdownItem>
+              <DropdownItem as={Link} to="/waterproofing-floor-covering-service">Chống thấm & ốp lát</DropdownItem>
+              <DropdownItem as={Link} to="/faultrepairservice">Xử lý sự cố</DropdownItem>
+              <DropdownItem as={Link} to="/renovationservice">Cơi nới & sửa chữa</DropdownItem>
+              <DropdownItem as={Link} to="/consultationservice">Tư vấn & thiết kế</DropdownItem>
             </DropdownColumn>
           </DropdownMenu>
         </NavItem>
