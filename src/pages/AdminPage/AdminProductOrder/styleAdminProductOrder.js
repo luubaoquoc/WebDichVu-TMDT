@@ -42,7 +42,8 @@ export const Tr = styled.tr`
 `;
 
 export const Td = styled.td`
-  padding: 12px;
+  padding: 10px 12px;
+  white-space: nowrap;
 `;
 
 export const ActionButton = styled.button`

@@ -9,3 +9,8 @@ body {
 html {
   font-size: 62.5%;
 }
+
+.ant-menu-item-divider {
+  border-color: #3571b8 !important; /* Đổi sang màu bạn muốn */
+  opacity: 1 !important; /* Tăng độ đậm nếu cần */
+}

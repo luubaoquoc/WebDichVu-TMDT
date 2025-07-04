@@ -1,22 +1,21 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
-export const FooterWrapper = styled.footer`
-  background-color:#003366;
+export const FooterWrapper = styled.div`
+  background-color: #003366;
   color: white;
   padding: 40px 150px;
   font-family: Arial, sans-serif;
   @media (max-width: 768px) {
     padding: 40px 20px;
   }
-  
-`
+`;
 
 export const FooterContainer = styled.div`
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 20px;
-`
+`;
 
 export const Column = styled.div`
   flex: 1;
@@ -30,7 +29,7 @@ export const Column = styled.div`
   }
 
   a {
-  display: block; 
+    display: block;
     margin: 8px 0;
     font-size: 15px;
     color: white;
@@ -44,12 +43,10 @@ export const Column = styled.div`
   .icon {
     margin-right: 8px;
   }
-`
+`;
 
 export const LeftColumn = styled.div`
-  
-
-flex: 1;
+  flex: 1;
   min-width: 150px;
   padding-left: 30px;
 
@@ -59,7 +56,8 @@ flex: 1;
     font-weight: bold;
   }
 
-  p, a {
+  p,
+  a {
     margin: 8px 0;
     font-size: 15px;
     color: white;
@@ -76,7 +74,7 @@ flex: 1;
   @media (max-width: 768px) {
     padding-left: 0;
   }
-`
+`;
 
 export const MapContainer = styled.div`
   flex: 1.5;
@@ -93,13 +91,12 @@ export const MapContainer = styled.div`
     width: 100%;
     margin-top: 20px;
   }
-    `
+`;
 
 export const FooterBottom = styled.div`
   margin-top: 30px;
   font-size: 13px;
   color: #eee;
   line-height: 1.6;
-  font-size: 18px
-  
-`
+  font-size: 18px;
+`;

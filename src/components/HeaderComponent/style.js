@@ -1,88 +1,89 @@
-import { Input } from "antd";
+import { Col, Input, Row } from "antd";
 import styled from "styled-components";
 import { SearchOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 
-export const HeaderContainer = styled.div`
-  position: fixed; /* Giữ nguyên khi cuộn */
+export const HeaderContainer = styled.header`
+  position: sticky;
   top: 0;
-  left: 0;
-  width: 100%;
   z-index: 1000; /* Đảm bảo hiển thị trên các phần khác */
 `;
 
-export const WrapperHeader = styled.div`
+export const WrapperHeader = styled(Row)`
   background-color: #d9d9d9;
-  padding: 10px 50px;
-  display: grid;
-  grid-template-columns: 1.5fr 1.5fr 1fr 1fr;
-  align-items: center;
-  gap: 50px;
-  height: 70px;
+  padding: 10px 16px;
 `;
 
 export const Logo = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 32px;
+  font-size: 3rem;
   justify-content: center;
+  @media (max-width: 576px) {
+    transform: scale(0.8);
+  }
 `;
 
 export const LogoImage = styled.img`
   width: 70px;
   height: 70px;
+  border-radius: 50%;
   object-fit: contain;
 `;
 
-export const SearchWrapper = styled.div`
-  position: relative;
-  width: 100%;
-  display: flex;
-  align-items: center;
-`;
+export const SearchWrapper = styled(Col)``;
+
 export const SearchBar = styled(Input)`
   width: 100%;
   border-radius: 20px;
   height: 50px;
 `;
 export const SearchIcon = styled(SearchOutlined)`
-  position: absolute;
-  right: 15px;
-  font-size: 18px;
+  font-size: 2rem;
   color: gray;
-  z-index: 1;
+  padding: 0 3px;
+  &:hover {
+    color: black;
+    cursor: pointer;
+  }
 `;
 
-export const Hotline = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  justify-content: center;
-`;
-
-export const HotlineText = styled.div`
-  display: flex;
-  flex-direction: column;
-  font-size: 24px;
+export const SearchButton = styled(Col)`
   text-align: center;
 `;
 
-export const AuthCart = styled.div`
+export const Hotline = styled(Col)`
+  @media (max-width: 992px) {
+    max-width: 150px;
+`;
+
+export const HotlineText = styled(Row)`
+  text-align: center;
+  font-size: 2rem !important;
+  & * {
+    font-size: inherit !important;
+  }
+`;
+
+export const AuthCart = styled(Col)`
   display: flex;
   align-items: center;
   gap: 15px;
   justify-content: center;
-  font-size: 24px;
+  font-size: 2.4rem;
   font-weight: bold;
-  cursor: pointer;
 `;
 
-export const Cart = styled.div`
+export const Cart = styled(Link)`
+  color: black;
+  margin-right: 8px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
   position: relative;
+  font-size: 1.8rem;
+  cursor: pointer;
 `;
 
 export const CartBadge = styled.span`
@@ -104,6 +105,9 @@ export const CartBadge = styled.span`
 
 export const Username = styled.span`
   font-size: 18px;
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 export const Navbar = styled.div`
@@ -112,31 +116,37 @@ export const Navbar = styled.div`
   display: flex;
   justify-content: center;
   gap: 30px;
-  height: 50px;
+  @media (max-width: 992px) {
+    display: none;
+  }
 `;
 
 export const NavItem = styled.a`
   color: white;
-  font-size: 28px;
+  font-size: 2rem;
   font-weight: bold;
   text-decoration: none;
   position: relative;
   padding: 10px 20px;
-  &:hover {
-    text-decoration: underline;
-  }
   &::after {
     content: "";
     position: absolute;
     right: -15px;
     top: 50%;
     transform: translateY(-50%);
-    height: 20px;
+    height: 25px;
     width: 1px;
     background-color: white;
   }
   &:last-child::after {
     display: none;
+  }
+  @media (max-width: 992px) {
+    font-size: 1.6rem;
+    &:hover {
+      color: white;
+      background-color: #002244;
+    }
   }
 `;
 
