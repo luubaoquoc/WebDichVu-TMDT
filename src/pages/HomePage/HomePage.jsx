@@ -1,5 +1,5 @@
 import React from "react";
-import { BannerContainer, BannerImage, CategoriesContainer, CategoryImage, CategoryItem, CategoryList, ContentContainer, ServiceBox, ServicesContainer, Sidebar, SidebarItem, SidebarTitle, Wrapper } from "./styleHome";
+import { BannerImage, CategoriesContainer, CategoryImage, CategoryItem, CategoryList, ContentContainer, ServiceBox, ServicesContainer, Wrapper } from "./styleHome";
 import DiscountedProducts from "../../components/DiscountedProducts/DiscountedProducts";
 
 const HomePage = () => {
@@ -7,21 +7,9 @@ const HomePage = () => {
     <Wrapper>
       {/* Danh sách sản phẩm + Banner */}
       <ContentContainer>
-        {/* Sidebar danh mục */}
-        <Sidebar>
-          <SidebarTitle>📋 Danh sách sản phẩm</SidebarTitle>
-          <SidebarItem>Điện thông minh</SidebarItem>
-          <SidebarItem>Đồ điện gia dụng</SidebarItem>
-          <SidebarItem>Thiết bị điện</SidebarItem>
-          <SidebarItem>Thiết bị nước</SidebarItem>
-          <SidebarItem>Thiết bị vệ sinh</SidebarItem>
-          <SidebarItem>Thạch cao thả</SidebarItem>
-        </Sidebar>
 
-        {/* Banner */}
-        <BannerContainer>
-          <BannerImage src="./assets/images/banner-home.jpg" alt="Banner 1" />
-        </BannerContainer>
+        <BannerImage src="./assets/images/banner-home.jpg" alt="Banner 1" />
+
       </ContentContainer>
 
       {/* Các dịch vụ */}

@@ -12,7 +12,7 @@ const ServiceWrapper = styled.div`
 `
 
 const ServiceImage = styled.img`
-  width: 120px;
+  width: 80px;
   height: auto;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0,0,0,0.2);
@@ -30,7 +30,7 @@ const Title = styled.div`
   background-color: #e74c3c;
   padding: 5px 10px;
   border-radius: 5px;
-  font-size: 14px;
+  font-size: 12px;
 `
 
 const FloatingServiceButton = () => {

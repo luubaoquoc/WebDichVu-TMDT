@@ -44,7 +44,7 @@ export const BannerContainer = styled.div`
 
 export const BannerImage = styled.img`
   width: 100%;
-  height: auto;
+  height: 400px;
   object-fit: cover;
 `;
 
