@@ -3,7 +3,7 @@ import Swal from "sweetalert2";
 import { validateRegister } from "../../utils/validateRegister";
 import { Modal, Checkbox } from "antd";
 import { GoogleOutlined, FacebookOutlined } from "@ant-design/icons";
-import { FormWrapper, LoginButton, SocialLogin, StyledInput } from "./Auth";
+import { FormWrapper, LinkSpan, LoginButton, SocialLogin, StyledInput } from "./Auth";
 import { registerUser, loginUser } from "../../services/api";
 
 const AuthForm = ({ visible, onClose }) => {
@@ -31,7 +31,7 @@ const AuthForm = ({ visible, onClose }) => {
         }
         const response = await registerUser(formData);
         if (response.data.status === "success") {
-          Swal.fire("Thành công!", "Đăng ký thành công!", "success");
+          Swal.fire("Thành công!", "Đăng ký thành công, Vui lòng kiểm tra email của bạn!", "success");
           setIsRegister(false); // Chuyển về form login
         } else {
           Swal.fire("Lỗi", response.data.message, "error");
@@ -82,26 +82,26 @@ const AuthForm = ({ visible, onClose }) => {
         {isRegister && (
           <StyledInput
             name="user_name"
-            placeholder="User Name"
+            placeholder="User Name..."
             onChange={handleChange}
           />
         )}
         <StyledInput
           name="user_email"
-          placeholder="Email"
+          placeholder="Email..."
           onChange={handleChange}
         />
         <StyledInput
           type="password"
           name="user_password"
-          placeholder="Password"
+          placeholder="Password..."
           onChange={handleChange}
         />
         {isRegister && (
           <StyledInput
             type="password"
             name="confirm_password"
-            placeholder="Confirm Password"
+            placeholder="Confirm Password..."
             onChange={handleChange}
           />
         )}
@@ -126,12 +126,12 @@ const AuthForm = ({ visible, onClose }) => {
         {!isRegister ? (
           <p>
             Chưa có tài khoản?{" "}
-            <a onClick={() => setIsRegister(true)}>Đăng ký</a>
+            <LinkSpan onClick={() => setIsRegister(true)}>Đăng ký</LinkSpan>
           </p>
         ) : (
           <p>
             Đã có tài khoản?{" "}
-            <a onClick={() => setIsRegister(false)}>Đăng nhập</a>
+            <LinkSpan onClick={() => setIsRegister(false)}>Đăng nhập</LinkSpan>
           </p>
         )}
 

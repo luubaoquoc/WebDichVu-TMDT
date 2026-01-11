@@ -18,6 +18,13 @@ export const ModalContent = styled.div`
   border-radius: 12px;
   width: 400px;
   position: relative;
+  height: 80vh;
+  overflow-y: auto;
+  margin-top: 40px;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 export const CloseButton = styled.button`

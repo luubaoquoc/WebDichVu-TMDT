@@ -60,12 +60,19 @@ export const Image = styled.img`
   height: 130px;
   object-fit: contain;
   margin-bottom: 10px;
+  &:hover {
+    transform: scale(1.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
 `;
 
 export const Category = styled.div`
   font-size: 12px;
   color: #777;
   margin-bottom: 5px;
+
+  
 `;
 
 export const Name = styled.div`

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import Swal from "sweetalert2";
 import {
@@ -15,6 +16,7 @@ import AuthForm from "../../pages/AuthPage/AuthPage";
 import { addToCart } from "../../redux/slides/cartSlice";
 
 const ProductCard = ({ product }) => {
+  const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true); // Biến để theo dõi trạng thái loading
@@ -46,15 +48,6 @@ const ProductCard = ({ product }) => {
         setIsModalOpen(true);
       });
     } else {
-      // name: { type: String, required: true },
-      //   qty: { type: Number, required: true },
-      //   image: { type: String, required: true },
-      //   price: { type: Number, required: true },
-      //   product: {
-      //     type: mongoose.Schema.Types.ObjectId,
-      //     ref: "Product",
-      //     required: true,
-      //   },
       dispatch(
         addToCart({
           orderItem: {
@@ -74,6 +67,7 @@ const ProductCard = ({ product }) => {
     <Card>
       <DiscountBadge>-{product.product_discount}%</DiscountBadge>
       <Image
+        onClick={() => navigate(`/details-product/${product._id}`)}
         src={`http://localhost:3001${product.product_image}`}
         alt={product.name}
       />

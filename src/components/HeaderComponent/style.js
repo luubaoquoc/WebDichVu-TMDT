@@ -112,7 +112,7 @@ export const Username = styled.span`
 
 export const Navbar = styled.div`
   background-color: #003366;
-  padding: 10px 50px;
+  padding: 5px 50px;
   display: flex;
   justify-content: center;
   gap: 30px;

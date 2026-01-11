@@ -26,6 +26,8 @@ import CleanAndTidyService from "../pages/ServicePage/waterandelectricityrepairs
 import WaterproofingFloorCoveringService from "../pages/ServicePage/waterandelectricityrepairservice/waterproofingfloorcovering";
 import CartPage from "../pages/CartPage/CartPage";
 import CheckoutPage from "../pages/CheckoutPage/CheckoutPage";
+import DetailsProduct from "../pages/DetailsProduct/DetailsProduct";
+import VerifyEmail from "../pages/VerifyRegister/VerifyEmail";
 
 export const routers = [
   {
@@ -34,8 +36,18 @@ export const routers = [
     isShowHeader: true,
   },
   {
+    path: "/verify-email",
+    page: VerifyEmail,
+    isShowHeader: true,
+  },
+  {
     path: "/products",
     page: ProductsPage,
+    isShowHeader: true,
+  },
+  {
+    path: "/details-product/:id",
+    page: DetailsProduct,
     isShowHeader: true,
   },
   {

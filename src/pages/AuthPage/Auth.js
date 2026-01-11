@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Input, Button} from "antd";
+import { Input, Button } from "antd";
 
 // Wrapper cho modal
 export const FormWrapper = styled.div`
@@ -8,6 +8,9 @@ export const FormWrapper = styled.div`
   align-items: center;
   padding: 20px;
   gap: 10px;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 `;
 
 // Input field
@@ -15,6 +18,7 @@ export const StyledInput = styled(Input)`
   width: 100%;
   height: 40px;
   border-radius: 5px;
+  border: 1px solid #ccc;
 `;
 
 // Button chính
@@ -25,7 +29,15 @@ export const LoginButton = styled(Button)`
   color: white;
   font-size: 16px;
   &:hover {
-    background-color: #002244;
+    background-color: #0000FF;
+  }
+`;
+
+export const LinkSpan = styled.span`
+  color: #003366;
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
   }
 `;
 

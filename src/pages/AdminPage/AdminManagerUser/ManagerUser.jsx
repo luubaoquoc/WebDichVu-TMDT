@@ -12,7 +12,7 @@ import {
     CreateButton,
 } from "./styleManagerUser";
 import AdminLayout from "../AdminLayout/AdminLayout";
-import { getAllUser, registerUser, blockUser, unBlockUser } from "../../../services/api";
+import { getAllUser, createUser, blockUser, unBlockUser } from "../../../services/api";
 import CreateUserModal from "../../../components/Modals/Users/CreateUserModal/CreateUserModal";
 import EditUserModal from "../../../components/Modals/Users/EditUserModal/EditUserModal";
 
@@ -52,7 +52,7 @@ const UserManagement = () => {
 
     const handleCreateSuccess = async (userData) => {
         try {
-            const res = await registerUser(userData);
+            const res = await createUser(userData);
             if (res.data.status === "success") {
                 fetchUsers();
                 Swal.fire("Thành công!", "Đăng ký thành công!", "success");

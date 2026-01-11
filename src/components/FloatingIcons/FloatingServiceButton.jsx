@@ -18,7 +18,7 @@ const ServiceWrapper = styled.div`
 `;
 
 const ServiceImage = styled.img`
-  width: 120px;
+  width: 80px;
   height: auto;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);

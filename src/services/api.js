@@ -1,8 +1,15 @@
 import axios from "axios";
 
+
 export const registerUser = async (userData) => {
   return axios.post(
     `${process.env.REACT_APP_API_BACKEND_URL}/user/register`,
+    userData
+  );
+};
+export const createUser = async (userData) => {
+  return axios.post(
+    `${process.env.REACT_APP_API_BACKEND_URL}/user/create`,
     userData
   );
 };
