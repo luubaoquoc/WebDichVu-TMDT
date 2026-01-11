@@ -121,13 +121,16 @@ export const Navbar = styled.div`
   }
 `;
 
-export const NavItem = styled.a`
+export const NavItem = styled.div`
   color: white;
   font-size: 2rem;
   font-weight: bold;
   text-decoration: none;
   position: relative;
   padding: 10px 20px;
+  &.nav-dropdown {
+    cursor: pointer;
+  }
   &::after {
     content: "";
     position: absolute;
@@ -161,7 +164,7 @@ export const DropdownMenu = styled.div`
   display: flex;
   gap: 20px;
   padding: 15px;
-  display: ${(props) => (props.show ? "flex" : "none")};
+  display: flex;
   width: 850px;
   min-width: 600px; /* Giúp menu không bị nhỏ */
   color: black; /* Đảm bảo chữ không bị trắng */

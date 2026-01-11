@@ -454,72 +454,69 @@ const HeaderComponent = () => {
         </NavItem>
         {/* Dropdown Dịch vụ */}
         <NavItem
+          className="nav-dropdown"
           onMouseEnter={() => setShowDropdown(true)}
           onMouseLeave={() => setShowDropdown(false)}
         >
           Dịch vụ ▼
-          <DropdownMenu show={showDropdown}>
-            <DropdownColumn>
-              <DropdownTitle>Điện nước</DropdownTitle>
-              <DropdownItem as={Link} to="/installationservice">
-                Lắp đặt điện lạnh
-              </DropdownItem>
-              <DropdownItem as={Link} to="/refrigerationrepairservice">
-                Sửa chữa điện lạnh
-              </DropdownItem>
-              <DropdownItem
-                as={Link}
-                to="/waterandelectricityinstallationservice"
-              >
-                Lắp đặt điện nước
-              </DropdownItem>
-              <DropdownItem as={Link} to="/waterandelectricityrepairservice">
-                Sửa chữa điện nước
-              </DropdownItem>
-              <DropdownItem as={Link} to="/plasterpaintservice">
-                Sơn bả & Thạch cao
-              </DropdownItem>
-            </DropdownColumn>
-            <DropdownColumn>
-              <DropdownTitle>Hút bể phốt</DropdownTitle>
-              <DropdownItem as={Link} to="/pipelineprocessingservice">
-                Xử lý đường ống
-              </DropdownItem>
-              <DropdownItem as={Link} to="/hygienicsuctionservice">
-                Hút vệ sinh
-              </DropdownItem>
-              <DropdownItem as={Link} to="/uncloggingdrainservice">
-                Thông tắc cống
-              </DropdownItem>
-              <DropdownItem as={Link} to="/uncloggingdrainservice">
-                Thông tắc vệ sinh
-              </DropdownItem>
-              <DropdownItem as={Link} to="/uncloggingdrainservice">
-                Thông tắc & xử lý
-              </DropdownItem>
-            </DropdownColumn>
-            <DropdownColumn>
-              <DropdownTitle>Xây dựng nhà ở</DropdownTitle>
-              <DropdownItem as={Link} to="/clean-and-tidy-service">
-                Dọn dẹp và vệ sinh
-              </DropdownItem>
-              <DropdownItem
-                as={Link}
-                to="/waterproofing-floor-covering-service"
-              >
-                Chống thấm & ốp lát
-              </DropdownItem>
-              <DropdownItem as={Link} to="/faultrepairservice">
-                Xử lý sự cố
-              </DropdownItem>
-              <DropdownItem as={Link} to="/renovationservice">
-                Cơi nới & sửa chữa
-              </DropdownItem>
-              <DropdownItem as={Link} to="/consultationservice">
-                Tư vấn & thiết kế
-              </DropdownItem>
-            </DropdownColumn>
-          </DropdownMenu>
+          {showDropdown && (
+            <DropdownMenu>
+              <DropdownColumn>
+                <DropdownTitle>Điện nước</DropdownTitle>
+                <DropdownItem to="/installationservice">
+                  Lắp đặt điện lạnh
+                </DropdownItem>
+                <DropdownItem to="/refrigerationrepairservice">
+                  Sửa chữa điện lạnh
+                </DropdownItem>
+                <DropdownItem to="/waterandelectricityinstallationservice">
+                  Lắp đặt điện nước
+                </DropdownItem>
+                <DropdownItem to="/waterandelectricityrepairservice">
+                  Sửa chữa điện nước
+                </DropdownItem>
+                <DropdownItem to="/plasterpaintservice">
+                  Sơn bả & Thạch cao
+                </DropdownItem>
+              </DropdownColumn>
+              <DropdownColumn>
+                <DropdownTitle>Hút bể phốt</DropdownTitle>
+                <DropdownItem to="/pipelineprocessingservice">
+                  Xử lý đường ống
+                </DropdownItem>
+                <DropdownItem to="/hygienicsuctionservice">
+                  Hút vệ sinh
+                </DropdownItem>
+                <DropdownItem to="/uncloggingdrainservice">
+                  Thông tắc cống
+                </DropdownItem>
+                <DropdownItem to="/uncloggingdrainservice">
+                  Thông tắc vệ sinh
+                </DropdownItem>
+                <DropdownItem to="/uncloggingdrainservice">
+                  Thông tắc & xử lý
+                </DropdownItem>
+              </DropdownColumn>
+              <DropdownColumn>
+                <DropdownTitle>Xây dựng nhà ở</DropdownTitle>
+                <DropdownItem to="/clean-and-tidy-service">
+                  Dọn dẹp và vệ sinh
+                </DropdownItem>
+                <DropdownItem to="/waterproofing-floor-covering-service">
+                  Chống thấm & ốp lát
+                </DropdownItem>
+                <DropdownItem to="/faultrepairservice">
+                  Xử lý sự cố
+                </DropdownItem>
+                <DropdownItem to="/renovationservice">
+                  Cơi nới & sửa chữa
+                </DropdownItem>
+                <DropdownItem to="/consultationservice">
+                  Tư vấn & thiết kế
+                </DropdownItem>
+              </DropdownColumn>
+            </DropdownMenu>
+          )}
         </NavItem>
         <NavItem as={Link} to="/news">
           Tin tức
