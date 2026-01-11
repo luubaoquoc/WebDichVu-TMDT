@@ -1,15 +1,19 @@
 import styled from "styled-components";
 
 export const CheckoutContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  gap: 40px;
   padding: 20px 150px;
   margin: 150px 0 80px 0;
+  @media (max-width: 1170.98px) {
+    padding: 10px 50px;
+    margin-top: 150px;
+  }
+  @media (max-width: 767.98px) {
+    padding: 10px 30px;
+    margin-top: 150px;
+  }
 `;
 
 export const CheckoutForm = styled.form`
-  flex: 1.2;
   background: #fff;
   border-radius: 8px;
   padding: 32px 24px 24px 24px;
@@ -78,7 +82,6 @@ export const Textarea = styled.textarea`
 `;
 
 export const OrderSummary = styled.div`
-  flex: 1;
   background: #fff;
   border-radius: 8px;
   padding: 7px 24px 24px 24px;

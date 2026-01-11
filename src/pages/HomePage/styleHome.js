@@ -1,9 +1,8 @@
 import styled from "styled-components";
 
-
 export const Wrapper = styled.div`
-  padding: 20px 150px;
-  margin-top: 150px;
+  padding: 30px 150px;
+  margin-top: 30px;
 `;
 
 export const ContentContainer = styled.div`

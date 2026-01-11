@@ -1,20 +1,28 @@
-import styled from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
+import { Col } from "antd";
+
+export const CartDividerHide = createGlobalStyle`
+  @media (max-width: 991.98px) {
+    .cart-divider {
+      display: none !important;
+    }
+  }
+`;
 
 export const PageContainer = styled.div`
   padding: 20px 150px;
-  margin-top: 150px;
-`;
-
-export const CartWrapper = styled.div`
-  display: flex;
-  gap: 40px;
-  align-items: flex-start;
-  justify-content: center;
+  @media (max-width: 1170.98px) {
+    padding: 10px 50px;
+  }
+  @media (max-width: 767.98px) {
+    padding: 10px 30px;
+  }
 `;
 
 export const CartEmptyWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
 `;
 
 export const CartEmptyNotify = styled.p`
@@ -23,12 +31,13 @@ export const CartEmptyNotify = styled.p`
 `;
 
 export const SummaryBox = styled.div`
-  flex: 1;
   background: #fff;
   border-radius: 8px;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
-  padding: 24px 24px 16px 24px;
-  min-width: 320px;
+  padding: 20px 24px 20px 24px;
+  @media (max-width: 578px) {
+    min-width: 450px;
+  }
 `;
 
 export const Breadcrumb = styled.p`
@@ -37,44 +46,20 @@ export const Breadcrumb = styled.p`
   margin-bottom: 10px;
 `;
 
-export const ProductList = styled.div`
-  flex: 2;
-`;
-
-export const ProductTable = styled.table`
-  width: 100%;
-  background: #fff;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
-  border-collapse: separate;
-  border-spacing: 0;
-`;
-
-export const Th = styled.th`
-  padding: 16px 8px;
-  background: #f8f9fa;
-  color: #333;
+export const CustomColHead = styled(Col)`
+  height: 50px;
+  padding: 10px 8px;
+  color: #777;
   font-weight: 700;
-  font-size: 17px;
+  font-size: 1.7rem;
   border-bottom: 2px solid #eee;
-  text-align: center;
+  text-align: ${({ textAlign }) => textAlign || "center"};
 `;
 
-export const Td = styled.td`
-  padding: 18px 8px;
-  border-bottom: 1px solid #eee;
-  vertical-align: middle;
-  text-align: center;
-`;
-
-export const TdInfo = styled(Td)`
+export const ProductDetail = styled.div`
   display: flex;
   align-items: center;
   gap: 16px;
-  text-align: left;
-  border-bottom: 1px solid #eee;
-  background: #fff;
 `;
 
 export const ProductImage = styled.img`
@@ -86,19 +71,38 @@ export const ProductImage = styled.img`
 `;
 
 export const ProductInfo = styled.div`
-  flex: 1;
+  display: flex;
+  flex-direction: column;
 `;
 
 export const ProductName = styled.div`
+  color: #334862;
   font-weight: 500;
-  font-size: 16px;
-  margin-bottom: 4px;
+  font-size: 1.6rem;
+  margin-bottom: 8px;
+`;
+
+export const ProductSubTotal = styled.div`
+  display: none;
+  align-items: center;
+  gap: 3px;
+  @media (max-width: 768px) {
+    &.hide-mobile {
+      display: flex !important;
+    }
+  }
+`;
+
+export const ProductQuantity = styled.span`
+  color: #334862;
+  font-weight: 400;
 `;
 
 export const ProductPrice = styled.div`
-  font-weight: 600;
+  font-weight: 700;
+  text-align: center;
   color: #222;
-  font-size: 16px;
+  font-size: 1.5rem;
 `;
 
 export const QuantityBox = styled.div`
@@ -131,23 +135,10 @@ export const QuantityInput = styled.input`
 `;
 
 export const ProductTotal = styled.div`
-  font-size: 20px;
-  font-weight: 600;
+  font-size: 1.5rem;
+  font-weight: 700;
   color: #007bff;
-  min-width: 90px;
   text-align: right;
-`;
-
-export const RemoveButton = styled.button`
-  background: none;
-  border: none;
-  color: #dc3545;
-  font-size: 22px;
-  cursor: pointer;
-  margin-right: 10px;
-  &:hover {
-    color: #b52a37;
-  }
 `;
 
 export const SummaryTitle = styled.div`
